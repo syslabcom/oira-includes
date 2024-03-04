@@ -13,16 +13,23 @@
                     href="{{ item.url }}#content">
                     <figure
                         class="tool-icon">
-                        <img 
-                            alt=""
-                            src="{{ item.icon }}">
+                        {% if item.icon %}
+                            <img 
+                                alt=""
+                                src="{{ item.icon }}"> 
+                        {% endif %}
                     </figure>
                 </a>
                 <div
                     class="tool-info">
                     <h2
                         class="tool-title">
-                        {{ item.title }}
+                         <a 
+                            class="pat-inject" 
+                            data-pat-inject="history: record"
+                            href="{{ item.url }}#content">
+                            {{ item.title }}
+                        </a>
                     </h2>
                     {% if item.tags %}
                         <p 
