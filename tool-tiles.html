@@ -1,0 +1,69 @@
+<div 
+    class="tool-tiles pat-masonry"
+    data-pat-masonry="column-width: .grid-sizer; gutter: 0; item-selector: .tool-tile">
+    <div 
+        class="grid-sizer"></div>
+    {% for item in site.tools %}
+        {% if item.layout == 'prozin/tool' %}
+            <div 
+                class="tool-tile">
+                <a 
+                    class="pat-inject" 
+                    data-pat-inject="history: record"
+                    href="{{ item.url }}#content">
+                    <figure
+                        class="tool-icon">
+                        <img 
+                            alt=""
+                            src="{{ item.icon }}">
+                    </figure>
+                </a>
+                <div
+                    class="tool-info">
+                    <h2
+                        class="tool-title">
+                        {{ item.title }}
+                    </h2>
+                    {% if item.tags %}
+                        <p 
+                            class="tool-tags tag-cloud">
+                            {% for tag in item.tags %}
+                                <a 
+                                    href="/tools/"
+                                    data-pat-inject="history: record; source: #application-content; target: #application-content && source: #assessments-toolbar-view-options; target: #assessments-toolbar-view-options"
+                                    class="tag pat-inject">{{ tag }}</a>
+                            {% endfor %}
+                        </p>
+                    {% endif %}
+                    {% if item.summary %}
+                        <section 
+                            class="summary">
+                            <p>
+                                {{ item.summary }}
+                            </p>
+                        </section>
+                    {% endif %}
+                    <form 
+                        class="button-bar pat-inject"
+                        action="/preparation#main"
+                        data-pat-inject="history: record">
+                        <button 
+                            type="submit" 
+                            name="tool-button" 
+                            value="edit-tool" 
+                            class="default pat-button">Edit</button>
+                        <button 
+                            type="submit" 
+                            name="tool-button" 
+                            value="test-tool" 
+                            class="pat-button">Test</button>
+                        <!-- <a 
+                            class= pat-button pat-inject" 
+                            data-pat-inject="history: record"
+                            href="{{ item.url }}#content">Information</a> -->
+                    </form>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
