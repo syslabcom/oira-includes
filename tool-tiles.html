@@ -10,7 +10,7 @@
                 <a 
                     class="pat-inject" 
                     data-pat-inject="history: record"
-                    href="{{ item.url }}#content">
+                    href="{{ item.url }}#document-body-{{ layout.application }}">
                     <figure
                         class="tool-icon">
                         {% if item.icon %}
@@ -27,7 +27,7 @@
                          <a 
                             class="pat-inject" 
                             data-pat-inject="history: record"
-                            href="{{ item.url }}#content">
+                            href="{{ item.url }}#document-body-{{ layout.application }}">
                             {{ item.title }}
                         </a>
                     </h2>
@@ -58,12 +58,12 @@
                             type="submit" 
                             name="tool-button" 
                             value="edit-tool" 
-                            class="default pat-button">Edit</button>
+                            class="default pat-button">{%- include patterns/i81n id="label_edit_imp" -%}</button>
                         <button 
                             type="submit" 
                             name="tool-button" 
                             value="test-tool" 
-                            class="pat-button">Test</button>
+                            class="pat-button">{%- include patterns/i81n id="label_test_imp" -%}</button>
                         <!-- <a 
                             class= pat-button pat-inject" 
                             data-pat-inject="history: record"
