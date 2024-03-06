@@ -54,7 +54,7 @@
                         <div 
                             class="button-bar">
                             <a 
-                                href="{{ item.url }}-state-edit#application-body-{{ layout.application }}"
+                                href="{{ item.url | replace: 'index','edit' }}#application-body-{{ layout.application }}"
                                 data-pat-inject="
                                     history: record"
                                 data-pat-switch="

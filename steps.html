@@ -1,0 +1,200 @@
+{% if tool_type == "ff" %}
+    {% assign preparation_url = "/preparation-fremdfirma.html" %}
+    {% assign action_plan_url = "/action-plan-landing-fremdfirma.html" %}
+    {% assign status_url = "/status-fremdfirma.html" %}
+    {% assign training_url = "/training-fremdfirma.html" %}
+{% else %}
+    {% assign preparation_url = "/preparation.html" %}
+    {% assign action_plan_url = "/action-plan-landing.html" %}
+    {% assign status_url = "/status.html" %}
+    {% assign training_url = "/training.html" %}
+{% endif %}
+
+<ol 
+    id="steps" 
+    class="navigation pat-navigation">
+    {% unless page.state == 'anonymous' %}
+        <li 
+            id="step-1"
+            class="complete {% if layout.section == 'preparation' %}active{% endif %}">
+        <a 
+            href="/{{ page.ra }}/index#content"
+            data-pat-inject="history: record"
+            class="preparation pat-switch pat-inject"
+            data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off">{%- include patterns/i18n id="label_preparation" -%}</a>
+        </li>
+        <li 
+            id="step-involve"
+            class="{% if layout.section == 'involve' %}active{% endif %}">
+            <a 
+                href="/{{ page.ra }}/involve#content"
+                class="involve pat-inject pat-switch"
+                data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off"
+                data-pat-inject="history: record">{%- include patterns/i18n id="label_involve" -%}</a>
+        </li>
+    <li class="{% if page.number %}active{% endif %} {% if page.url contains 'read-only' %}disabled{% endif %}" id="step-2">
+
+      {% assign first_module = tool_contents | where: "number", "1.0" | first %}
+
+      <a {% unless page.url contains "read-only" %}href="{{ first_module.url }}#content"{% endunless %}
+         data-pat-inject="history: record"
+         class="identification pat-switch pat-inject"
+         data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off">{% if tool.integrated_actionplan==true%}{%- include patterns/i18n id="label_assessment" -%}{% else %}{% include patterns/i18n id="label_identification" %} + {% include patterns/i18n id="label_evaluation" %}{% endif %}</a>
+
+      {% if page.number %}
+
+        <div 
+          class="topics" 
+          id="step-2-topics">
+
+          {% if page.number %}
+            {% assign pagelevel = page.number | split: '.' %}
+            {%- include oira/risk-tree.html -%}
+          {% endif %}
+
+          <ul class="legend">
+            <li class="unvisited">{{ site.data.oira.ui.unanswered[lang] }}</li>
+            <li class="postponed">{{ site.data.oira.ui.postponed[lang] }}</li>
+            <li class="no-risk">{{ site.data.oira.ui.no_risk[lang] }}</li>
+            <li class="answered risk">{{ site.data.oira.ui.identified[lang] }}</li>
+            {% if site.data.brands[site.brand].additional_status_information contains 'overall_statistics' %}
+              <li class="answered risk measures">{{ site.data.oira.ui.identified_with_measures[lang] }}</li>
+            {% endif %}
+          </ul>
+
+        </div>
+
+      {% endif %}
+
+    </li>
+
+    {% unless tool.integrated_actionplan==true %}
+      <li id="step-4" class="{% if page.url contains 'action-plan' %}active{% endif %} {% if page.url contains 'read-only' %}disabled{% endif %}">
+        <!-- The tree for the action section uses the same structure as the identification tree, with the only differences that only risks and their parent modules are shown and that the entire tree is expanded. -->
+        <a {% unless page.url contains "read-only" %}href="/{{ page.ra }}/action-plan#content"{% endunless %}
+            data-pat-inject="history: record"
+            class="action-plan pat-switch pat-inject"
+            data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off">{%- include patterns/i18n id="label_action_plan" -%}</a>
+        {% if page.url contains 'action-plan' %}
+          <div class="topics" id="step-4-topics">
+              <ol class="questions">
+                {% for risk in tool_contents  %}
+                  {% if risk.classes contains 'action_plan' %}
+                    <li class="{{ risk.classes }} {% if risk.title == page.title or risk.problem_description == page.problem_description %}current{% endif %}">
+                      <a href="{{risk.url}}#main-content"
+                          data-pat-inject="history: record; && source: #main-content; target: #main-content && source: #status; target: #status"
+                          class="pat-switch pat-inject"
+                          data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off"><strong class="number">{{ risk.risk_number }}</strong> {{ risk.problem_description }}</a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ol>
+
+            <ul class="legend">
+              <li class="answered risk">{{ site.data.oira.ui.identified[lang] }}</li>
+            </ul>
+          </div>
+        {% endif %}
+      </li>
+    {% endunless %}
+
+    <li 
+        id="step-consultancy" 
+        {% if layout.section == 'consultancy' %}class="active"{% endif %}>
+        <a 
+            class="consultancy pat-switch pat-inject"
+            data-pat-inject="history: record"
+            data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off"
+            href="/{{ page.ra }}/consultancy#content">{% include patterns/i18n id="label_consultancy" %}</a>
+    </li>
+
+    <li id="step-5" {% if layout.section == 'report' %}class="active"{% endif %}>
+      {% if page.state == 'guest' %}
+        <a class="report pat-switch pat-inject"
+            data-pat-inject="history: record"
+            data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off"
+            href="/{{ page.ra }}/report#content">{%- include patterns/i18n id="label_report" -%}</a>
+      {% else %}
+        <a class="report pat-switch pat-inject"
+            data-pat-inject="history: record"
+            data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off"
+            href="/{{ page.ra }}/report#content">{%- include patterns/i18n id="label_report" -%}</a>
+      {% endif %}
+    </li>
+
+    {% if tool.training %}
+      <li id="step-6" class="{% if layout.section contains 'training' %}active{% endif %}">
+        <a href="/{{ page.ra }}/training#content"
+            class="training pat-inject pat-switch"
+            data-pat-inject="history: record"
+            data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off">{%- include patterns/i18n id="label_training" -%}</a>
+      </li>
+    {% endif %}
+  {% endunless %}
+
+  {% unless include.mode == 'edit' %}
+    {% unless page.state == 'anonymous' %}
+      <li id="status" class="{% if layout.section == 'status' %}active{% endif %}">
+        <a href="/{{ page.ra }}/status#content"
+            data-pat-inject="history: record"
+            class="status pat-switch pat-inject"
+            data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off">{%- include patterns/i18n id="label_status" -%}
+          <!-- <strong class="pie-graph {% if page.completed <= 10 %}pat-tooltip{% endif %}"
+              data-pat-tooltip="trigger: hover; position-list: lm"
+              data-percentage="{% if page.completed %}{{ page.completed }}{% else %}57{% endif %}"
+              title="{% if page.completed %}{{ page.completed }}{% else %}57{% endif %}% Complete">{% if page.completed %}{{ page.completed }}{% else %}57{% endif %}%</strong> --></a>
+        {% comment %}
+          {% unless page.url contains 'status' %}
+            {% unless page.completed <= 10 %}
+              <div class="status-sentinel pat-message notice">
+                <form action="{{ page.url }}#status" class="pat-inject">
+                  <button type="submit" class="close-panel">Hide this message</button>
+                </form>
+                {% if page.completed >= site.certificate_minimum %}
+                  {% include snippet-certificate-earned.html %}
+                {% else %}
+                  {% include snippet-certificate.html %}
+                {% endif %}
+                {% if page.completed >= site.certificate_minimum %}
+                  <p class="button-bar">
+                    <a class="pat-button pat-inject" data-pat-inject="history: record" href="/certificate-public">View certificate</a>
+                    <!-- The URL of the next (optional) link is changeable via the CMS, together with the benefits text. -->
+                  </p>
+                {% endif %}
+              </div>
+            {% endunless %}
+          {% endunless %}
+        {% endcomment %}
+      </li>
+      {% endunless %}
+      <li 
+          class="{% if layout.section == 'settings' %}active{% endif %}" 
+          id="settings">
+          <a
+              href="/{{ page.ra }}/settings#content"
+              data-pat-inject="history: record"
+              class="settings pat-switch pat-inject"
+              data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off">{% include patterns/i18n id="label_settings" %}</a>
+      </li>
+      <li 
+          id="home">
+          <a
+              href="/assessments#content"
+              data-pat-inject="history: record"
+              class="home pat-switch pat-inject"
+              data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off">{%- include patterns/i18n id="label_exit" -%}</a>
+      </li>
+      {% comment %}
+      <li 
+          id="help" 
+          class="{% if layout.section == 'help' %}active{% endif %}">
+          <a 
+              href="/help.html#content" 
+              data-pat-inject="history: record" 
+              class="help pat-switch pat-inject" 
+              data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off">{%- include patterns/i18n id="label_help" -%}</a>
+      </li>
+      {% endcomment %}
+    {% endunless %}
+</ol>
+
