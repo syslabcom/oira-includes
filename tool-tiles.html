@@ -50,25 +50,44 @@
                             </p>
                         </section>
                     {% endif %}
-                    <form 
-                        class="button-bar pat-inject"
-                        action="/preparation#main"
-                        data-pat-inject="history: record">
-                        <button 
-                            type="submit" 
-                            name="tool-button" 
-                            value="edit-tool" 
-                            class="default pat-button">{%- include patterns/i18n id="label_edit_imp" -%}</button>
-                        <button 
-                            type="submit" 
-                            name="tool-button" 
-                            value="test-tool" 
-                            class="pat-button">{%- include patterns/i18n id="label_test_imp" -%}</button>
-                        <!-- <a 
-                            class= pat-button pat-inject" 
-                            data-pat-inject="history: record"
-                            href="{{ item.url }}#content">Information</a> -->
-                    </form>
+                    {% if include.mode == "edit" %}
+                        <div 
+                            class="button-bar">
+                            <a 
+                                href="{{ item.url }}-state-edit#application-body-{{ layout.application }}"
+                                data-pat-inject="
+                                    history: record"
+                                data-pat-switch="
+                                    selector: #application-body-{{ layout.application }};
+                                    remove: sidebar-left-*;
+                                    add: sidebar-left-open"
+                                class="default pat-button pat-inject pat-switch">{%- include patterns/i18n id="label_edit_imp" -%}</a>
+                            <button 
+                                type="submit" 
+                                name="tool-button" 
+                                value="test-tool" 
+                                class="pat-button">{%- include patterns/i18n id="label_test_imp" -%}</button>
+                            <!-- <a 
+                                class= pat-button pat-inject" 
+                                data-pat-inject="history: record"
+                                href="{{ item.url }}#content">Information</a> -->
+                        </div> 
+                    {% else %}
+                        <form 
+                            class="button-bar pat-inject"
+                            action="/preparation#main"
+                            data-pat-inject="history: record">
+                            <button 
+                                type="submit" 
+                                name="tool-button" 
+                                value="edit-tool" 
+                                class="default pat-button">{%- include patterns/i18n id="label_start_ra" -%}</button>
+                            <a 
+                                class= pat-button pat-inject" 
+                                data-pat-inject="history: record"
+                                href="{{ item.url }}#content">Information</a>
+                        </form>  
+                    {% endif %}
                 </div>
             </div>
         {% endif %}
