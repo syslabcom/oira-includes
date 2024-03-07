@@ -1,248 +1,42 @@
-{% assign tool_contents = site.tools %}
-
-<ol
-  class="risk-tree">
-  {% for profile in tool_contents  %}
-    {% if profile.layout == 'apps/assessments/profile' %}
-      {% capture id %}{{ profile.fid }}{% endcapture %}
-      {% assign p_url = page.url | split: '/' %}
-      <li 
-        class="{% if profile.url == page.url %}current{% endif %}">
-        <a 
-          href="{{profile.url}}" 
-          class="pat-switch pat-inject" 
-          data-pat-inject="history: record; source: #step-2; target: #step-2 && source: #main-content; target: #main-content" data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off"><strong class="counter">{{profile.number | replace: '.0' }}</strong> {{profile.title}}</a>
-        {% assign profilelevel = profile.number | split: '.' %}
-        {% if pagelevel[0] == profilelevel[0] %}
-          {% unless page.layout == 'profile' and page.filter_question %}
-            <ol>
-              {% for module in tool_contents  %}
-                {% if module.layout == 'module' and module.parent_id == id %}
-                  {% assign m_url = module.url | split: '/' %}
-                  {% capture m_id %}{{ module.fid }}{% endcapture %}
-                  <li 
-                    class="submodule {% if m_url[-1] == p_url[-1] %}current{% endif %}">
+<ol 
+    class="risk-tree pat-navigation">
+    {% for module in site.tools %}
+        {% if module.layout contains 'module' %}
+            {% unless module.parent_id %}
+                <li>
                     <a 
-                        href="{{module.url}}" 
-                        class="pat-switch pat-inject" 
-                        data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off"  
-                        data-pat-inject="history: record; source: #step-2; target: #step-2 && source: #main-content; target: #main-content"><strong class="counter">{{module.number | replace: '.0' }}</strong> {{module.title}}</a>
-                    {% assign modulelevel = module.number | split: '.' %}
-                    {% if pagelevel[0] == modulelevel[0] and pagelevel[1] == modulelevel[1] %}
-                      <ol 
-                        class="questions">
-                        {% for risk in tool_contents  %}
-                        {% unless risk.classes contains 'action_plan' %}
-                          {% capture p_id %}{{ id }}-{{ m_id}}{% endcapture %}
-                          {% assign r_url = risk.url | split: '/' %}
-                          {% if risk.parent_id == p_id %}
-                            <li 
-                                class="{{risk.classes}} {% if r_url[-1] == p_url[-1] %}current{% endif %}">
-                              <a 
-                                href="{{risk.url}}#main-content"
-                                data-pat-inject="history: record; && source: #main-content; target: #main-content && source: #status; target: #status"
-                                class="pat-switch pat-inject"
-                                data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off"><strong class="number">{{risk.number}}</strong>
-                                {% if tool.mode == 'funny' %}
-                                    {{risk.title}}
-                                {% else %}
-                                    {{risk.problem_description}}
-                                {% elsif tool.mode == 'risk' %}
-                                    {{risk.title}}
-                                {% endif %}
-                              </a>
-                            </li>
-                          {% endif %}
-                        {% endunless %}
-                        {% endfor %}
-                      </ol>
-                    {% endif %}
-                  </li>
-                {% elsif module.layout == 'location' and module.parent_id == id %}
-                  <h4 class="location-tag">{{module.title}}</h4>
-                  {% capture l_id %}{{ id }}-{{ module.fid }}{% endcapture %}
-                  {% for lmodule in tool_contents  %}
-                    {% if lmodule.layout == 'module' and lmodule.parent_id == l_id %}
-                      <ol>
-                        {% capture m_id %}{{ lmodule.fid }}{% endcapture %}
-                        <li class="submodule {% if lmodule.url == page.url %}current{% endif %}" >
-                          <a href="{{lmodule.url}}"
-                              class="pat-switch pat-inject"
-                              data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off"
-                              data-pat-inject="history: record; source: #step-2; target: #step-2 && source: #main-content; target: #main-content"><strong class="counter">{{lmodule.number | replace: '.0' }}</strong> {{lmodule.title}}</a>
-                          {% assign modulelevel = lmodule.number | split: '.' %}
-                          {% if pagelevel[0] == modulelevel[0] and pagelevel[1] == modulelevel[1] %}
-                            <ol class="questions">
-                              {% for risk in tool_contents  %}
-                              {% unless risk.classes contains 'action_plan' %}
-                                {% capture p_id %}{{ l_id }}-{{ m_id}}{% endcapture %}
-                                {% if risk.parent_id == p_id %}
-                                  <li class="{{risk.classes}} {% if risk.url == page.url %}current{% endif %}">
-                                    <a href="{{risk.url}}"
-                                        data-pat-inject="history: record; && source: #main-content; target: #main-content && source: #status; target: #status"
-                                        class="pat-switch pat-inject"
-                                        data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off"><strong class="number">{{risk.number}}</strong>
-                                      {% if tool.mode == 'funny' %}
-                                        {{risk.title}}
-                                      {% else %}
-                                        {{risk.problem_description}}
-                                      {% elsif tool.mode == 'risk' %}
-                                        {{risk.title}}
-                                      {% endif %}
-                                    </a>
-                                  </li>
-                                {% endif %}
-                              {% endunless %}
-                              {% endfor %}
-                            </ol>
-                          {% endif %}
-                        </li>
-                      </ol>
-                    {% endif %}
-                  {% endfor %}
-                {% endif %}
-              {% endfor %}
-            </ol>
-          {% endunless %}
-        {% endif %}
-      </li>
-    {% elsif profile.layout == 'apps/assessments/profile-in-site-inspection' %}
-      {% capture id %}{{ profile.fid }}{% endcapture %}
-      <li 
-        class="{% if profile.url == page.url %}current{% endif %}" id="in-site-inspection">
-        <a href="{{profile.url}}"
-            class="pat-switch pat-inject"
-            data-pat-inject="history: record; source: #step-2; target: #step-2 && source: #main-content; target: #main-content"
-            data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off"><strong class="counter">{{profile.number | replace: '.0' }}</strong> {{profile.title}}</a>
-        {% assign profilelevel = profile.number | split: '.' %}
-        {% unless page.filter_question %}
-          {% if pagelevel[0] == profilelevel[0] or page.layout == 'risk-other-in-site' %}
-            <ol>
-              {% for module in tool_contents  %}
-                {% if module.layout == 'in-site-omega' and module.parent_id == id %}
-                  {% capture m_id %}{{ module.fid }}{% endcapture %}
-                  <li class="submodule {% if module.url == page.url %}current{% endif %}">
-                    <a href="{{module.url}}" class="pat-switch pat-inject" data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off"  data-pat-inject="history: record; source: #step-2; target: #step-2 && source: #main-content; target: #main-content"><strong class="counter">{{module.number | replace: '.0' }}</strong> {{module.title}}</a>
-                    {% assign modulelevel = module.number | split: '.' %}
-                    {% if page.url contains 'add-risk-in-site' or pagelevel[1] == modulelevel[1]   %}
-                      {% if pagelevel[0] == modulelevel[0] or modulelevel[1] == '1' %}
-                        {% for risk in tool_contents  %}
-                        {% unless risk.classes contains 'action_plan' %}
-                          {% capture p_id %}{{ id }}-{{ m_id}}{% endcapture %}
-                          {% if risk.parent_id == p_id %}
-                            {% assign has_children=true %}
-                          {% endif %}
-                        {% endunless %}
-                        {% endfor %}
-                        {% if has_children or page.url contains 'add-risk-in-site'%}
-                          <ol class="questions">
-                            {% for risk in tool_contents  %}
-                            {% unless risk.classes contains 'action_plan' %}
-                              {% capture p_id %}{{ id }}-{{ m_id}}{% endcapture %}
-                              {% if risk.parent_id == p_id %}
-                                <li class="{{risk.classes}} {% if risk.url == page.url %}current{% endif %}">
-                                  <a href="{{risk.url}}#main-content"
-                                      data-pat-inject="history: record; && source: #main-content; target: #main-content && source: #status; target: #status"
-                                      class="pat-switch pat-inject"
-                                      data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off"><strong class="number">{{risk.number}}</strong>
-                                    {{risk.title}}
-                                  </a>
-                                </li>
-                              {% endif %}
-                            {% endunless %}
-                            {% endfor %}
-                            {% if page.url contains 'add-risk-in-site' and modulelevel[1] == '1' %}
-                              <li class="risk current">
-                                <a href="/add-risk" class="pat-switch pat-inject" data-pat-inject="history: record" data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off">
-                                  <strong class="number">{{module.number | replace: '.0' }}.1 - {{ addnew }}</strong>
-                                  {% if page.url contains 'simulated-add-risk' %}{{ page.problem_description }}{% else %}…{% endif %}
-                                </a>
-                              </li>
-                            {% endif %}
-                          </ol>
-                        {% endif %}
-                      {% endif %}
-                    {% endif %}
-                  </li>
-                {% endif %}
-              {% endfor %}
-            </ol>
-          {% endif %}
-        {% endunless %}
-      </li>
-    {% elsif profile.layout == 'apps/assessments/module' and profile.parent_id == 'None' %}
-      {% capture id %}{{ profile.fid }}{% endcapture %}
-      <li 
-        class="{% if profile.url == page.url %}current{% endif %}">
-        <a href="{{ profile.url }}"
-            class="pat-switch pat-inject"
-            data-pat-inject="history: record; source: #step-2; target: #step-2 && source: #main-content; target: #main-content"
-            data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off"><strong class="counter">{{ profile.number | replace: '.0' }}</strong>{{ profile.title }}</a>
-        {% assign profilelevel = profile.number | split: '.' %}
-        {% if pagelevel[0] == profilelevel[0] %}
-          <!-- <ol class="questions {% if page.filter_question %}pat-depends{% endif %}" {% if page.filter_question %}data-pat-depends="condition: filter=yes; transition: slide"{% endif %}> -->
-          {% unless page.layout == 'module' and page.filter_question %}
-            <ol class="questions">
-              {% for risk in site[page.ra] %}
-                {% if risk.parent_id == id %}
-                  <li class="{{risk.classes}} {% if risk.url == page.url %}current{% endif %}">
-                    <a href="{{risk.url}}#main-content"
-                        data-pat-inject="history: record; && source: #main-content; target: #main-content && source: #status; target: #status"
-                        class="pat-switch pat-inject"
-                        data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off"><strong class="number">{{risk.number}}</strong>
-                      {% if tool.mode == 'normal' %}
-                        {{risk.problem_description}}
-                      {% elsif tool.mode == 'funny' %}
-                        {{risk.title}}
-                      {% elsif tool.mode == 'risk' %}
-                        {{risk.title}}
-                      {% endif %}
+                        class="module pat-inject"
+                        data-pat-inject="history: record"
+                        href="{{ module.url }}#document-body-{{ layout.application }}">
+                        <span 
+                            class="title">
+                            {{ module.title }}
+                        </span>
                     </a>
-                  </li>
-                {% endif %}
-              {% endfor %}
-            </ol>
-          {% endunless %}
-        {% endif %}
-      </li>
-    {% endif %}
-  {% endfor %}
-  {%- unless include.mode == 'edit' -%}
-    <li 
-        id="other-risks" 
-        class="{% if p_url[-1] == 'other-risks' %}current{% endif %}">
-        <a 
-            href="/{{ page.ra }}/items/other-risks"
-            class="pat-switch pat-inject"
-            data-pat-inject="history: record; source: #step-2; target: #step-2 && source: #main-content; target: #main-content"
-            data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off"><strong class="counter">Ω</strong> {{ site.data.oira.ui.other_risks[lang] }}</a>
-        {% if page.url contains 'other-risks' or page.layout == 'risk-other' %}
-        <ol class="questions">
-            {% for item in tool_contents %}
-            {% if item.layout == 'risk-other' %}
-                <li class="risk {% if item.url == page.url %}current{% endif %}">
-                <a href="{{ item.url }}#content"
-                    class="pat-switch pat-inject"
-                    data-pat-inject="history: record; && source: #main-content; target: #main-content && source: #status; target: #status"
-                    data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off">
-                    <strong class="number">
-                    {{item.number | replace: '.0' }}
-                    </strong>
-                    {{ item.problem_description }}
-                </a>
+                    <ol>
+                        {% for sub in site.tools %}
+                            {% if sub.parent_id == module.fid %}
+                                <li>
+                                    {% if sub.layout contains 'module' %}
+                                        {% assign this_type = 'module' %}
+                                    {% else %}
+                                        {% assign this_type = 'risk' %}
+                                    {% endif %}
+                                    <a 
+                                        class="{{ this_type }} pat-inject"
+                                        data-pat-inject="history: record"
+                                        href="{{ sub.url }}#document-body-{{ layout.application }}">
+                                        <span 
+                                            class="title">
+                                            {{ sub.title }}
+                                        </span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ol>
                 </li>
-            {% endif %}
-            {% endfor %}
-            {% if page.url contains 'add-risk' %}
-            <li class="risk current">
-                <a href="/add-risk" class="pat-switch pat-inject" data-pat-inject="history: record" data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off">
-                <strong class="number">Ω.2</strong>
-                {% if page.url contains 'simulated-add-risk' %}{{ page.problem_description }}{% else %}…{% endif %}
-                </a>
-            </li>
-            {% endif %}
-        </ol>
+            {% endunless %}
         {% endif %}
-    </li>
-  {%- endunless -%}
+    {% endfor %}
 </ol>
