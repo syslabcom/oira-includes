@@ -2,40 +2,44 @@
     class="risk-tree pat-navigation">
     {% for module in site.tools %}
         {% if module.layout contains 'module' %}
-            {% unless module.parent_id %}
-                <li>
-                    <a 
-                        class="module pat-inject"
-                        data-pat-inject="history: record"
-                        href="{{ module.url }}#document-body-{{ layout.application }}">
-                        <span 
-                            class="title">
-                            {{ module.title }}
-                        </span>
-                    </a>
-                    <ol>
-                        {% for sub in site.tools %}
-                            {% if sub.parent_id == module.fid %}
-                                <li>
-                                    {% if sub.layout contains 'module' %}
-                                        {% assign this_type = 'module' %}
-                                    {% else %}
-                                        {% assign this_type = 'risk' %}
-                                    {% endif %}
-                                    <a 
-                                        class="{{ this_type }} pat-inject"
-                                        data-pat-inject="history: record"
-                                        href="{{ sub.url }}#document-body-{{ layout.application }}">
-                                        <span 
-                                            class="title">
-                                            {{ sub.title }}
-                                        </span>
-                                    </a>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-                    </ol>
-                </li>
+            {% unless module.url contains '-state-' %}
+                {% unless module.parent_id %}
+                    <li>
+                        <a 
+                            class="module pat-inject"
+                            data-pat-inject="history: record"
+                            href="{{ module.url }}#document-body-{{ layout.application }}">
+                            <span 
+                                class="title">
+                                {{ module.title }}
+                            </span>
+                        </a>
+                        <ol>
+                            {% for sub in site.tools %}
+                                {% if sub.parent_id == module.fid %}
+                                    {% unless sub.url contains '-state-' %}
+                                        <li>
+                                            {% if sub.layout contains 'module' %}
+                                                {% assign this_type = 'module' %}
+                                            {% else %}
+                                                {% assign this_type = 'risk' %}
+                                            {% endif %}
+                                            <a 
+                                                class="{{ this_type }} pat-inject"
+                                                data-pat-inject="history: record"
+                                                href="{{ sub.url }}#document-body-{{ layout.application }}">
+                                                <span 
+                                                    class="title">
+                                                    {{ sub.title }}
+                                                </span>
+                                            </a>
+                                        </li>
+                                    {% endunless %}
+                                {% endif %}
+                            {% endfor %}
+                        </ol>
+                    </li>
+                {% endunless %}
             {% endunless %}
         {% endif %}
     {% endfor %}

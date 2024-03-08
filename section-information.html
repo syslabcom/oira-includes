@@ -1,0 +1,21 @@
+<div class="pat-rich">
+    {{ content | markdownify }}
+</div>
+{% if page.images %}
+    <div 
+        class="
+            risk-illustrations 
+            pat-gallery">
+            {% for image in page.images %}
+                <figure 
+                    class="illustration">
+                    <a 
+                        href="{{ image.url }}">
+                        <img 
+                            src="{{ image.url }}"
+                            title="{{ image.caption }}" />
+                    </a>
+                </figure>
+            {% endfor %}
+    </div>
+{% endif %}

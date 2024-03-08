@@ -1,0 +1,64 @@
+<fieldset 
+    class="vertical">
+    {% if page.evaluation_method == 'risk_calculated' %}
+        <p 
+            class="problem-description">
+            <strong>{{ page.problem_description }}</strong>
+        </p>
+        <p 
+            class="instruction">
+            {{ site.data.oira.ui.description_calculated_evaluation[site.data.config.lang] }}
+        </p>
+        <fieldset 
+            class="pat-checklist radio">
+            <legend>
+                {{ site.data.oira.ui.header_risk_probability[site.data.config.lang] }}
+                <dfn 
+                    class="info-icon pat-tooltip" 
+                    data-pat-tooltip="source: content; position-list: lt">Indicate how likely occurence of this risk is in a normal situation.</dfn>
+            </legend>
+            <label><input type="radio" name="chance" value="small" checked="checked" /> {{ site.data.oira.ui.label_small[site.data.config.lang] }}</label>
+            <label><input type="radio" name="chance" value="medium" /> {{ site.data.oira.ui.label_medium[site.data.config.lang] }}</label>
+            <label><input type="radio" name="chance" value="large" /> {{ site.data.oira.ui.label_large[site.data.config.lang] }}</label>
+        </fieldset>
+        <fieldset 
+            class="pat-checklist radio">
+            <legend>
+                {{ site.data.oira.ui.header_risk_frequency[site.data.config.lang] }}
+                <dfn class="info-icon pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Indicate how often this risk occurs in a normal situation.</dfn>
+            </legend>
+            <label><input type="radio" name="exposed" value="am" /> {{ site.data.oira.ui.label_almost_never[site.data.config.lang] }}</label>
+            <label><input type="radio" name="exposed" value="re" checked="checked"  /> {{ site.data.oira.ui.label_regularly[site.data.config.lang] }}</label>
+            <label><input type="radio" name="exposed" value="co" /> {{ site.data.oira.ui.label_constantly[site.data.config.lang] }}</label>
+        </fieldset>
+        <fieldset 
+            class="pat-checklist radio">
+            <legend>
+                {{ site.data.oira.ui.header_risk_severity[site.data.config.lang] }}
+                <dfn class="info-icon pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Indicate the default severity of this risk occurs.</dfn>
+            </legend>
+            <label><input type="radio" name="effect" value="ws" /> {{ site.data.oira.ui.label_weak_severity[site.data.config.lang] }}</label>
+            <label><input type="radio" name="effect" value="ss" /> {{ site.data.oira.ui.label_significant_severity[site.data.config.lang] }}</label>
+            <label><input type="radio" name="effect" value="hs" checked="checked"  /> {{ site.data.oira.ui.label_high_severity[site.data.config.lang] }}</label>
+        </fieldset>
+    {% elsif page.evaluation_method == 'risk_estimated'  %}
+        <p 
+            class="problem-description">
+            <strong>{{ page.problem_description }}</strong>
+        </p>
+        <fieldset 
+            class="pat-checklist radio">
+            <legend>{{ site.data.oira.ui.label_select_risk_priority[site.data.config.lang] }}</legend>
+            <label><input type="radio" name="chance" value="low" /> {{ site.data.oira.ui.label_low[site.data.config.lang] }}</label>
+            <label><input type="radio" name="chance" value="medium" /> {{ site.data.oira.ui.label_medium[site.data.config.lang] }}</label>
+            <label><input type="radio" name="chance" value="high" checked="checked" /> {{ site.data.oira.ui.label_high[site.data.config.lang] }}</label>
+        </fieldset>
+    {% else %}
+        {% unless tool.integrated_actionplan==true %}
+            <!-- The next line is required only in stand alone action plan mode. -->
+            <p>description_automatic_evaluation
+                {{ site.data.oira.ui.description_automatic_evaluation[site.data.config.lang] }}
+            </p>
+        {% endunless %}
+    {% endif %}
+</fieldset>

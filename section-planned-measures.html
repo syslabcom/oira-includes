@@ -1,0 +1,43 @@
+<div 
+    class="pat-rich">
+    {% if page.measures_in_place %}
+        {% if page.solutions  %}
+            <!-- When there are possible measures in place present and standard measures are available: -->
+            <p>
+                Select or describe any further measure to reduce the risk.
+            </p>
+        {% else %}
+            <!-- When there are possible measures in place present and no standard measures are available:  -->
+            <p>
+                Describe any further measure to reduce the risk.
+            </p>
+        {% endif %}
+    {% else %}
+        {% if page.solutions %}
+            <!-- When there are no possible measures in place present but standard measures are present:  -->
+            <p>
+                Select or describe the specific measures required to reduce the risk.
+            </p>
+        {% else %}
+            <!-- When there are no possible measures in place present and no standard measures are available:  -->
+            <p>
+                Describe the specific measures required to reduce the risk.
+            </p>
+        {% endif %}
+    {% endif %}
+</div>
+<div 
+    class="button-bar">
+    <button 
+        class="pat-button icon-plus-circle pat-depends visible" 
+        data-pat-depends="condition: not (sm-1 and sm-2 and sm-3 and sm-4)" 
+        id="add-standard-measures" 
+        title="Add another measure" 
+        type="button">{%- include patterns/i18n source="oira" id="label_select_standard_measures" -%}</button>
+  
+    <button 
+        class="add-clone pat-button icon-plus-circle" 
+        id="clone-extra-measure" 
+        title="Add another measure" 
+        type="button">{%- include patterns/i18n source="oira" id="label_extra_add_measure" -%}</button>
+</div>
