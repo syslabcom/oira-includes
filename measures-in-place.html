@@ -1,0 +1,139 @@
+{% assign lang = page.lang | default: site.data.config.lang %}
+
+<fieldset
+    class="
+        pat-checklist 
+        pat-clone 
+        pat-autosubmit 
+        pat-inject 
+        pat-subform"
+    data-pat-clone="template: #measure-template; trigger-element: #clone-existing-measure; remove-confirmation: Are you sure you want to remove this existing measure?"
+    id="action-plan-item-form"
+    data-pat-inject="url: {{ page.url  }}; source: #slide-1; target: #slide-1">
+    <article class="pat-rich">
+        <p>
+            {% if page.measures_in_place %}
+                {{ site.data.oira.ui.label_select_or_add_existing_measures[lang] }}
+            {% else %}
+                {{ site.data.oira.ui.label_add_existing_measures[lang] }}
+            {% endif %}
+        </p>
+    </article>
+    {% for measure in page.measures_in_place %}
+        <div
+            class="label">
+            <label
+                class="label-fragment-title">
+                <input
+                    type="checkbox"
+                    name="existing-measures"
+                    {% if measure.state == 'checked' %}checked{% endif %} />
+                    {{ measure.label }}
+            </label>
+            {% if measure.description %}
+<div class="label-fragment-description pat-rich"><pre class="pat-markdown">
+{{ measure.description }}</pre>
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+    {% for measure in page.measures_in_place_user_added %}
+        <div
+            class="clone label">
+            <input
+                type="checkbox"
+                name="existing-measures"
+                disabled
+                checked />
+            <div 
+                class="pat-rich-editor pat-rich toolbar-detached">
+                {% capture this_placeholder %}{{ site.data.oira.ui.describe_new_measure[lang] }}{% endcapture %}
+                {% include patterns/rich-editor.html
+                    placeholder=this_placeholder
+                    toolbar="assessment-toolbar"
+                    link-panel="#pat-modal.panel-hyperlink"
+                    link-menu="/feedback/hyperlink-menu#document-content"
+                    autofocus=false
+                    placeholder=this_placeholder %}
+            </div>
+            <button
+                class="icon-trash iconified remove-clone"
+                title="{{ site.data.oira.ui.remove_measure[lang] }}">{{ site.data.oira.ui.remove[lang] }}</button>
+        </div>
+    {% endfor %}
+</fieldset>
+
+<div
+    class="button-bar cloning">
+    <button
+        class="add-clone small pat-button icon-plus-circle"
+        id="clone-existing-measure"
+        title="Add another measure"
+        type="button">{% if page.measures_in_place %}{{ site.data.oira.ui.add_missing_existing_measure[lang] }}{% else %}{{ site.data.oira.ui.add_existing_measure[lang] }}{% endif %}</button>
+</div>
+
+<template 
+    id="measure-template">
+    <fieldset 
+        class="clone label">
+        <input
+            type="checkbox"
+            name="existing-measures-check-1"
+            disabled
+            checked />
+        <div 
+            class="pat-rich-editor pat-rich toolbar-detached">
+            {% capture this_placeholder %}{{ site.data.oira.ui.describe_new_measure[lang] }}{% endcapture %}
+            {% include patterns/rich-editor.html
+                textarea_name="measure-rich-1"
+                placeholder=this_placeholder
+                toolbar="assessment-toolbar"
+                link-panel="#pat-modal.panel-hyperlink"
+                link-menu="/feedback/hyperlink-menu#document-content"
+                autofocus=false
+                placeholder=this_placeholder %}
+        </div>
+        <button
+            class="icon-trash iconified remove-clone"
+            title="{{ site.data.oira.ui.remove_measure[lang] }}">{{ site.data.oira.ui.remove[lang] }}</button>
+    </fieldset>
+</template>
+
+<fieldset
+    class="pat-checklist radio">
+    <legend>
+        {{ site.data.oira.ui.question_measures_sufficient[lang] }}
+    </legend>
+    <label
+        class="no">
+        <input
+            type="radio"
+            name="answer"
+            value="no"
+            {% if page.classes contains 'answered' and page.classes contains 'risk' %}checked="checked"{% endif %}
+        />
+        {{ site.data.oira.ui.no_measures_required[lang] }}
+    </label>
+    <label
+        class="yes">
+        <input
+            type="radio"
+            name="answer"
+            value="yes"
+            {% if page.classes contains 'risk' %}
+            {% else %}
+                {% if page.classes contains 'answered' %}checked="checked"{% endif %}
+            {% endif %}
+        />
+        {{ site.data.oira.ui.yes_acceptable[lang] }}
+    </label>
+    <label
+        class="not-applicable">
+        <input
+            type="radio"
+            name="answer"
+            value="na"
+            {% if page.classes contains 'postponed' %}checked{% endif %} />
+        {{ site.data.oira.ui.not_applicable[lang] }}
+    </label>
+</fieldset>
