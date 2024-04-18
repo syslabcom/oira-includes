@@ -38,7 +38,9 @@
             </label>
             {% if measure.description %}
 <div 
-    class="label-fragmenteasu-description pat-rich"><pre class="pat-markdown">
+    class="
+        label-fragment-description 
+        pat-rich"><pre class="pat-markdown">
 {{ measure.description }}</pre>
                 </div>
             {% endif %}
@@ -92,6 +94,7 @@
             class="pat-rich-editor pat-rich toolbar-detached">
             {% capture this_placeholder %}{{ site.data.oira.ui.describe_new_measure[site.lang] }}{% endcapture %}
             {% include patterns/rich-editor.html
+                autofocus=true
                 textarea_name="measure-rich-1"
                 placeholder=this_placeholder
                 toolbar="assessment-toolbar"
