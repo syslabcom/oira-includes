@@ -1,6 +1,11 @@
 <div 
-    class="tool-tiles pat-masonry"
-    data-pat-masonry="column-width: .grid-sizer; gutter: 0; item-selector: .tool-tile">
+    class="
+        tool-tiles 
+        pat-masonry"
+    data-pat-masonry="
+        column-width: .grid-sizer; 
+        gutter: 0; 
+        item-selector: .tool-tile">
     <div 
         class="grid-sizer"></div>
     {% for item in site.tools %}
@@ -35,10 +40,15 @@
                         <p 
                             class="tool-tags tag-cloud">
                             {% for tag in item.tags %}
-                                <a 
-                                    href="/tools/"
-                                    data-pat-inject="history: record; source: #application-content; target: #application-content && source: #assessments-toolbar-view-options; target: #assessments-toolbar-view-options"
-                                    class="tag pat-inject">{{ tag }}</a>
+                                {% if include.mode == "edit" %}
+                                    <span 
+                                        class="tag">{{ tag }}</span>
+                                {% else %}
+                                    <a 
+                                        href="/tools/"
+                                        data-pat-inject="history: record; source: #application-content; target: #application-content && source: #assessments-toolbar-view-options; target: #assessments-toolbar-view-options"
+                                        class="tag pat-inject">{{ tag }}</a>
+                                {% endif %}
                             {% endfor %}
                         </p>
                     {% endif %}
