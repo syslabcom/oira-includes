@@ -75,7 +75,7 @@
 <div
     class="button-bar cloning">
     <button
-        class="add-clone small pat-button icon-plus-circle"
+        class="add-clone pat-button icon-plus"
         id="clone-existing-measure"
         title="Add another measure"
         type="button">{% if page.measures_in_place %}{{ site.data.oira.ui.add_missing_existing_measure[site.lang] }}{% else %}{{ site.data.oira.ui.add_existing_measure[site.lang] }}{% endif %}</button>
@@ -100,7 +100,6 @@
                 toolbar="assessment-toolbar"
                 link-panel="#pat-modal.panel-hyperlink"
                 link-menu="/feedback/hyperlink-menu#document-content"
-                autofocus=false
                 placeholder=this_placeholder %}
         </div>
         <button
