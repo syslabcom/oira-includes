@@ -1,12 +1,18 @@
 <ol 
     class="risk-tree pat-navigation">
     {% for module in site.tools %}
-        {% if module.layout contains 'module' %}
+        {% if module.layout contains 'module' or module.layout contains 'profile-question' %}
             {% unless module.url contains '-state-' %}
                 {% unless module.parent_id %}
                     <li>
                         <a 
-                            class="module pat-inject"
+                            class="
+                                {% if module.layout contains 'module' %}
+                                    module
+                                {% else %}
+                                    profile-question
+                                {% endif %} 
+                                pat-inject"
                             data-pat-inject="history: record"
                             href="{{ module.url }}#document-body-{{ layout.application }}">
                             <span 
