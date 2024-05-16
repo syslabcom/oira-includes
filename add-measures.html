@@ -1,0 +1,205 @@
+{% include oira/add-measures-pop-over.html %}
+{% assign lang = page.lang | default: site.data.config.lang %}
+
+<div 
+    class="measures pat-clone pat-switch"
+    data-pat-clone="template: #extra-measure-template; trigger-element: #clone-extra-measure; remove-confirmation: Are you sure you want to remove this measure?"
+    data-pat-switch="selector: #measures-panel; remove: open; add: closed"
+    id="ActionPlanItemForm">
+    {% if page.layout == 'action' %}
+        <div 
+            class="measure pat-collapsible closed">
+            <h2>
+                {{ site.data.oira.ui.label_implemented_measure[lang] }}: Visual inspection of work areas
+            </h2>
+            <h4>
+                Description
+            </h4>
+            <div 
+                class="pat-rich">
+<pre 
+    class="pat-markdown">
+Make sure a visual inspection of work areas is carried out in order to identify the potential hazards of falls and slips. Check that the anti-fall fittings and protective measures are present and in good condition."
+    expertise: "Contrary to popular belief, Lorem Ipsum is not simply random text.
+
+Beware of the following possible hazards.
+
+- Slippery slopes
+- Falling pianos
+- Angry queens
+
+
+It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
+</pre>
+            </div>
+
+        </div>
+     {% endif %}
+
+    {% assign solution_nr = 1 %}
+    {% for solution in page.solutions %}
+        <div 
+            class="measure pat-collapsible closed pat-depends"
+            data-pat-depends="condition: sm-{{ solution_nr }}">
+            <h2>
+                {{ solution.title }}
+            </h2>
+            <p 
+                class="functions">
+                <a 
+                    href="#pick-sm-{{ solution_nr }}"
+                    class="icon-trash pat-forward"
+                    data-pat-forward="selector: #sm-{{ solution_nr }}"
+                    title="Remove this measure.">Remove</a>
+            </p>
+            <section 
+                class="pat-rich">
+                <h4>
+                    Description
+                </h4>
+                <p>
+                    {{ solution.description }}
+                </p>
+                <h4>
+                    Expertise
+                </h4>
+                <p>
+                    {{ solution.expertise }}
+                </p>
+            </section>
+            {% include add-measure-additional-meta-data.html %}
+        </div>
+        {% assign solution_nr = solution_nr | plus: 1 %}
+    {% endfor %}
+
+    {% assign extra_nr = 1 %}
+    {% for extra in page.extra_measures %}
+        <div 
+            class="measure pat-collapsible {% if extra.state == 'open' %}open{% else %}closed{% endif %}">
+            <h2>
+                {{ site.data.oira.ui.label_addition_measure[lang] }} {{ extra_nr }}
+            </h2>
+            <p 
+                class="functions">
+                <a 
+                    href="#pick-sm-{{ extra_nr }}"
+                    class="icon-trash pat-forward"
+                    data-pat-forward="selector: #sm-{{ extra_nr }}"
+                    title="Remove this measure.">{{ site.data.oira.ui.remove[lang] }}</a>
+            </p>
+            <fieldset 
+                class="vertical" id="fields-#{1}">
+                <label>
+                    {{ site.data.oira.ui.label_description[lang] }}
+                    <dfn 
+                        class="info-icon pat-tooltip"
+                        data-pat-tooltip="source: content; position-list: lt">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</dfn>
+                    {% capture this_placeholder %}{% include patterns/i18n id="placeholder_comment" %}{% endcapture %}
+                    {% capture these_notes %}{{ page.notes | markdownify }}{% endcapture %}
+                    {% include patterns/rich-editor.html
+                        placeholder=this_placeholder
+                        toolbar="assessment-toolbar"
+                        image-panel="#pat-modal.image-picker"
+                        link-panel="#pat-modal.panel-hyperlink"
+                        html-source-panel="#pat-modal.panel-html-source-editor"
+                        link-menu="/feedback/hyperlink-menu#document-content"
+                        mentions-menu="/feedback/panel-mentions-tiptap#document-content"
+                        tags-menu="/feedback/panel-tags-tiptap#document-content"
+                        autofocus=false
+                        content=these_notes %}
+                </label>
+                <label>
+                    {{ site.data.oira.ui.label_expertise[lang] }}
+                    <textarea 
+                        class="requirements"
+                        name="requirements"
+                        placeholder="Level of expertise and/or requirements needed"
+                        rows="3"></textarea>
+                </label>
+            </fieldset>
+            {% include add-measure-additional-meta-data.html %}
+        </div>
+        {% assign solution_nr = extra_nr | plus: 1 %}
+    {% endfor %}
+</div>
+
+<template 
+    id="extra-measure-template">
+    <div 
+        class="measure pat-collapsible">
+        <h2>{{ site.data.oira.ui.label_addition_measure[lang] }} #{1}</h2>
+        <p 
+            class="functions">
+            <a 
+                class="icon-trash remove-clone"
+                title="Remove this measure.">{{ site.data.oira.ui.remove[lang] }}</a>
+        </p>
+
+        <fieldset 
+            class="vertical" 
+            id="fields-#{1}">
+            <fieldset
+                class="group">
+                <legend>
+                    {{ site.data.oira.ui.label_description[lang] }}
+                    <dfn 
+                        class="info-icon pat-tooltip"
+                        data-pat-tooltip="source: content; position-list: lt">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</dfn> 
+                </legend>                   
+                {% capture this_placeholder %}{% include patterns/i18n id="placeholder_approach_action_plan" %}{% endcapture %}
+                {% capture these_notes %}{{ page.notes | markdownify }}{% endcapture %}
+                <div 
+                    class="pat-rich-editor pat-rich toolbar-detached">
+                    {% include patterns/rich-editor.html
+                        placeholder=this_placeholder
+                        toolbar="assessment-toolbar"
+                        image-panel="#pat-modal.image-picker"
+                        link-panel="#pat-modal.panel-hyperlink"
+                        html-source-panel="#pat-modal.panel-html-source-editor"
+                        link-menu="/feedback/hyperlink-menu#document-content"
+                        mentions-menu="/feedback/panel-mentions-tiptap#document-content"
+                        tags-menu="/feedback/panel-tags-tiptap#document-content"
+                        autofocus=true
+                        content=these_notes %}
+                </div>
+            </fieldset>
+            <fieldset
+                class="group">
+                <legend>{{ site.data.oira.ui.label_expertise[lang] }}</legend>
+                {% capture these_notes %}{{ page.notes | markdownify }}{% endcapture %}
+                <div 
+                    class="pat-rich-editor pat-rich toolbar-detached">
+                    {% include patterns/rich-editor.html
+                        placeholder="Level of expertise and/or requirements needed"
+                        toolbar="assessment-toolbar"
+                        image-panel="#pat-modal.image-picker"
+                        link-panel="#pat-modal.panel-hyperlink"
+                        html-source-panel="#pat-modal.panel-html-source-editor"
+                        link-menu="/feedback/hyperlink-menu#document-content"
+                        mentions-menu="/feedback/panel-mentions-tiptap#document-content"
+                        tags-menu="/feedback/panel-tags-tiptap#document-content"
+                        autofocus=false %}
+            </fieldset>
+        </fieldset>
+
+        {% include add-measure-additional-meta-data.html %}
+    </div>
+</template>
+
+<div 
+    class="button-bar">
+    {% if page.solutions %}
+    <button 
+        class="small pat-button icon-plus-circle pat-depends"
+        data-pat-depends="condition: not (sm-1 and sm-2 and sm-3 and sm-4)"
+        id="add-standard-measures"
+        title="Add another measure"
+        type="button">{{ site.data.oira.ui.label_select_standard_measures[lang] }}</button>
+  {% endif %}
+    <button 
+        class="add-clone small pat-button icon-plus-circle"
+        id="clone-extra-measure"
+        title="Add another measure"
+        type="button">{{ site.data.oira.ui.label_extra_add_measure[lang] }}</button>
+    <!-- <a class="small pat-button pat-tooltip icon-up-circle" title="Use an predefined text to pre-fill your measure with." data-pat-tooltip="source: ajax; position-list: bm" href="#standard-solutions">Foo</a> -->
+</div>
