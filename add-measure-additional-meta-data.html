@@ -1,0 +1,49 @@
+{% assign lang = page.lang | default: site.data.config.lang %}
+<fieldset 
+    class="vertical">
+    <label>
+        {{ site.data.oira.ui.label_action_plan_responsible[lang] }}
+        <dfn 
+            class="info-icon pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Appoint someone in your company to be responsible for the implementation of this measure. This person will have the authority to take the steps described in the Plan and/or the responsibility to ensure that they are carried out.</dfn>
+        <input 
+            class="responsible" 
+            name="responsible" 
+            type="text">
+    </label>
+    <label 
+        class="currency">
+        {{ site.data.oira.ui.label_action_plan_budget[lang] }}
+        <dfn 
+            class="info-icon pat-tooltip" 
+            data-pat-tooltip="source: content; position-list: lt">Although some measures do not cost any money, most do. The measures should therefore be budgeted for; include them in the annual budget round if necessary.</dfn>
+        <input 
+            type="number" 
+            name="budget" 
+            min="16" 
+            max="66" 
+            required="required" 
+            data-pat-validation="message-max: More than 66 is too much!" />
+    </label>
+    <label>
+        {{ site.data.oira.ui.label_action_plan_start[lang] }}
+        <input 
+            type="date" 
+            name="planning-start"
+            class="pat-date-picker" 
+            id="planning-start"
+            data-pat-date-picker="output-format: Do MMMM YYYY; locale: {{ lang }}"
+            data-pat-validation="not-after: #planning-end; message-date: Must be before Planning End."
+        />
+    </label>
+    <label>
+        {{ site.data.oira.ui.label_action_plan_end[lang] }}
+        <input 
+            type="date" 
+            name="planning-end"
+            class="pat-date-picker" 
+            id="planning-end"
+            data-pat-date-picker="output-format: Do MMMM YYYY; locale: {{ lang }}"
+            data-pat-validation="not-before: #planning-start; message-date: Must be after Planning Start."
+        />
+    </label>
+</fieldset>
