@@ -39,7 +39,11 @@ It has roots in a piece of classical Latin literature from 45 BC, making it over
     {% assign solution_nr = 1 %}
     {% for solution in page.solutions %}
         <div 
-            class="measure pat-collapsible closed pat-depends"
+            class="
+                measure 
+                pat-collapsible 
+                closed 
+                pat-depends"
             data-pat-depends="condition: sm-{{ solution_nr }}">
             <h2>
                 {{ solution.title }}
@@ -182,24 +186,23 @@ It has roots in a piece of classical Latin literature from 45 BC, making it over
             </fieldset>
         </fieldset>
 
-        {% include add-measure-additional-meta-data.html %}
+        {% include oira/add-measure-additional-meta-data.html %}
     </div>
 </template>
 
 <div 
     class="button-bar">
     {% if page.solutions %}
+        <button 
+            class="pat-button icon-plus pat-depends visible" 
+            data-pat-depends="condition: not (sm-1 and sm-2 and sm-3 and sm-4)" 
+            id="add-standard-measures" 
+            title="Add another measure" 
+            type="button">{%- include patterns/i18n source="oira" id="label_select_standard_measures" -%}</button>
+    {% endif %}
     <button 
-        class="small pat-button icon-plus-circle pat-depends"
-        data-pat-depends="condition: not (sm-1 and sm-2 and sm-3 and sm-4)"
-        id="add-standard-measures"
-        title="Add another measure"
-        type="button">{{ site.data.oira.ui.label_select_standard_measures[lang] }}</button>
-  {% endif %}
-    <button 
-        class="add-clone small pat-button icon-plus-circle"
-        id="clone-extra-measure"
-        title="Add another measure"
-        type="button">{{ site.data.oira.ui.label_extra_add_measure[lang] }}</button>
-    <!-- <a class="small pat-button pat-tooltip icon-up-circle" title="Use an predefined text to pre-fill your measure with." data-pat-tooltip="source: ajax; position-list: bm" href="#standard-solutions">Foo</a> -->
+        class="add-clone pat-button icon-plus" 
+        id="clone-extra-measure" 
+        title="Add another measure" 
+        type="button">{%- include patterns/i18n source="oira" id="label_extra_add_measure" -%}</button>
 </div>

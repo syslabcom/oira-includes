@@ -1,27 +1,47 @@
 {% assign lang = page.lang | default: site.data.config.lang %}
-<div class="pat-modal-pop-over pat-collapsible {% if page.measures_panel == 'open' %}open{% else %}closed{% endif %} pat-depends"
+<div 
+    class="
+        pat-modal-pop-over 
+        pat-collapsible 
+        {% if page.measures_panel == 'open' %}open{% else %}closed{% endif %} pat-depends"
      id="measures-panel"
-     data-pat-collapsible="open-trigger: #add-standard-measures; close-trigger: #close-standard-measures"
-     data-pat-depends="condition: not (sm-1 and sm-2 and sm-3 and sm-4)">
-    <h2 class="title">
+     data-pat-collapsible="
+        open-trigger: #add-standard-measures; 
+        close-trigger: #close-standard-measures"
+     data-pat-depends="
+        condition: not (sm-1 and sm-2 and sm-3 and sm-4)">
+    <h2 
+        class="title">
         {{ site.data.oira.ui.label_standard_measures[lang] }}
     </h2>
-    <section class="pat-rich description">
+    <section 
+        class="pat-rich description">
         <p>
             {{ site.data.oira.ui.label_select_measure[lang] }}
         </p>
     </section>
-    <div class="pat-checklist pat-pick-list free-form">
+    <div 
+        class="
+            pat-checklist 
+            pat-pick-list 
+            free-form">
         {% assign solution_nr = 1 %}
         {% for solution in page.solutions %}
-            <label class="item">
-                <input type="checkbox" id="sm-{{ solution_nr }}" name="sm-{{ solution_nr }}" />
-                <span class="text">{{ solution.title }}</span>
-                <span class="functions"><em class="small pat-button icon-plus-circle">{{ site.data.oira.ui.button_add[lang] }}</em></span>
+            <label 
+                class="item">
+                <input 
+                    type="checkbox" 
+                    id="sm-{{ solution_nr }}" 
+                    name="sm-{{ solution_nr }}" />
+                <span 
+                    class="text">{{ solution.title }}</span>
+                <span 
+                    class="functions"><em class="small pat-button icon-plus-circle">{%- include patterns/i18n id="button_add_imp" -%}</em></span>
             </label>
             {% assign solution_nr = solution_nr | plus: 1 %}
         {% endfor %}
     </div>
 </div>
-<button id="close-standard-measures"
-        type="button">Close panel</button>
+<button 
+    id="close-standard-measures"
+    type="button">Close panel</button>
