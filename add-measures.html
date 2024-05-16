@@ -79,7 +79,10 @@ It has roots in a piece of classical Latin literature from 45 BC, making it over
     {% assign extra_nr = 1 %}
     {% for extra in page.extra_measures %}
         <div 
-            class="measure pat-collapsible {% if extra.state == 'open' %}open{% else %}closed{% endif %}">
+            class="
+                measure 
+                pat-collapsible 
+                {% if extra.state == 'open' %}open{% else %}closed{% endif %}">
             <h2>
                 {{ site.data.oira.ui.label_addition_measure[lang] }} {{ extra_nr }}
             </h2>
