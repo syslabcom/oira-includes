@@ -31,6 +31,7 @@
             <label
                 class="label-fragment-title">
                 <input
+                    tabindex="0" 
                     type="checkbox"
                     name="existing-measures"
                     {% if measure.state == 'checked' %}checked{% endif %} />
@@ -50,6 +51,7 @@
         <div
             class="clone label">
             <input
+                tabindex="0" 
                 type="checkbox"
                 name="existing-measures"
                 disabled
@@ -66,15 +68,22 @@
                     placeholder=this_placeholder %}
             </div>
             <button
-                class="icon-trash iconified remove-clone"
+                tabindex="0" 
+                class="
+                    icon-trash 
+                    iconified 
+                    remove-clone"
                 title="{{ site.data.oira.ui.remove_measure[site.lang] }}">{{ site.data.oira.ui.remove[site.lang] }}</button>
         </div>
     {% endfor %}
 </fieldset>
 
 <div
-    class="button-bar cloning">
+    class="
+        button-bar 
+        cloning">
     <button
+        tabindex="0" 
         class="add-clone pat-button icon-plus"
         id="clone-existing-measure"
         title="Add another measure"
@@ -116,6 +125,7 @@
     <label
         class="no">
         <input
+            tabindex="0"
             type="radio"
             name="answer"
             value="no"
@@ -126,6 +136,7 @@
     <label
         class="yes">
         <input
+            tabindex="0"
             type="radio"
             name="answer"
             value="yes"
@@ -139,6 +150,7 @@
     <label
         class="not-applicable">
         <input
+            tabindex="0"
             type="radio"
             name="answer"
             value="na"

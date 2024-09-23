@@ -50,7 +50,8 @@ It has roots in a piece of classical Latin literature from 45 BC, making it over
             </h2>
             <p 
                 class="functions">
-                <a 
+                <a
+                    tabindex="0" 
                     href="#pick-sm-{{ solution_nr }}"
                     class="icon-trash pat-forward"
                     data-pat-forward="selector: #sm-{{ solution_nr }}"
@@ -89,6 +90,7 @@ It has roots in a piece of classical Latin literature from 45 BC, making it over
             <p 
                 class="functions">
                 <a 
+                    tabindex="0" 
                     href="#pick-sm-{{ extra_nr }}"
                     class="icon-trash pat-forward"
                     data-pat-forward="selector: #sm-{{ extra_nr }}"
@@ -118,6 +120,7 @@ It has roots in a piece of classical Latin literature from 45 BC, making it over
                 <label>
                     {{ site.data.oira.ui.label_expertise[lang] }}
                     <textarea 
+                        tabindex="0" 
                         class="requirements"
                         name="requirements"
                         placeholder="Level of expertise and/or requirements needed"
@@ -175,7 +178,10 @@ It has roots in a piece of classical Latin literature from 45 BC, making it over
                 <legend>{{ site.data.oira.ui.label_expertise[lang] }}</legend>
                 {% capture these_notes %}{{ page.notes | markdownify }}{% endcapture %}
                 <div 
-                    class="pat-rich-editor pat-rich toolbar-detached">
+                    class="
+                        pat-rich-editor 
+                        pat-rich 
+                        toolbar-detached">
                     {% include patterns/rich-editor.html
                         placeholder="Level of expertise and/or requirements needed"
                         toolbar="assessment-toolbar"
@@ -197,6 +203,7 @@ It has roots in a piece of classical Latin literature from 45 BC, making it over
     class="button-bar">
     {% if page.solutions %}
         <button 
+            tabindex="0" 
             class="pat-button icon-plus pat-depends visible" 
             data-pat-depends="condition: not (sm-1 and sm-2 and sm-3 and sm-4)" 
             id="add-standard-measures" 
@@ -204,6 +211,7 @@ It has roots in a piece of classical Latin literature from 45 BC, making it over
             type="button">{%- include patterns/i18n source="oira" id="label_select_standard_measures" -%}</button>
     {% endif %}
     <button 
+        tabindex="0" 
         class="add-clone pat-button icon-plus" 
         id="clone-extra-measure" 
         title="Add another measure" 
