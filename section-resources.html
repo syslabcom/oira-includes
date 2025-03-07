@@ -1,0 +1,6 @@
+{% if page.legal_reference %}
+<section class="legal-references pat-rich">
+    <h4>{% include patterns/i18n id='oira.label_legal_and_policy_references' %}</h4>
+        {{ page.legal_reference | markdownify }}
+</section> 
+{% endif %}
