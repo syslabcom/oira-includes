@@ -32,14 +32,24 @@
                 data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off"
                 data-pat-inject="history: record">{%- include patterns/i18n id="label_involve" -%}</a>
         </li>
-    <li class="{% if page.number %}active{% endif %} {% if page.url contains 'read-only' %}disabled{% endif %}" id="step-2">
+    <li 
+        class="{% if page.number %}active{% endif %} {% if page.url contains 'read-only' %}disabled{% endif %}" 
+        id="step-2">
 
       {% assign first_module = tool_contents | where: "number", "1.0" | first %}
 
-      <a {% unless page.url contains "read-only" %}href="{{ first_module.url }}#content"{% endunless %}
-         data-pat-inject="history: record"
-         class="identification pat-switch pat-inject"
-         data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off">{% if tool.integrated_actionplan==true%}{%- include patterns/i18n id="label_analysis" -%}{% else %}{% include patterns/i18n id="label_identification" %} + {% include patterns/i18n id="label_evaluation" %}{% endif %}</a>
+      <a 
+          {% unless page.url contains "read-only" %}href="{{ first_module.url }}#content"{% endunless %}
+          data-pat-inject="history: record"
+          class="
+              identification 
+              pat-switch 
+              pat-inject"
+          data-pat-switch="
+              selector: #main; 
+              remove: sidebar-*; 
+              add: sidebar-off">
+          {%- if tool.integrated_actionplan==true%}{%- include patterns/i18n id="label_analysis" -%}{% else %}{% include patterns/i18n id="label_identification" %} + {% include patterns/i18n id="label_evaluation" %}{% endif %}</a>
 
       {% if page.number %}
 
