@@ -39,7 +39,7 @@
       <a {% unless page.url contains "read-only" %}href="{{ first_module.url }}#content"{% endunless %}
          data-pat-inject="history: record"
          class="identification pat-switch pat-inject"
-         data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off">{% if tool.integrated_actionplan==true%}{%- include patterns/i18n id="label_assessment" -%}{% else %}{% include patterns/i18n id="label_identification" %} + {% include patterns/i18n id="label_evaluation" %}{% endif %}</a>
+         data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off">{% if tool.integrated_actionplan==true%}{%- include patterns/i18n id="label_analysis" -%}{% else %}{% include patterns/i18n id="label_identification" %} + {% include patterns/i18n id="label_evaluation" %}{% endif %}</a>
 
       {% if page.number %}
 
