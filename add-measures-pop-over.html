@@ -36,7 +36,7 @@
                 <span 
                     class="text">{{ solution.title }}</span>
                 <span 
-                    class="functions"><em class="small pat-button icon-plus-circle">{%- include patterns/i18n id="button_add_imp" -%}</em></span>
+                    class="functions"><em class="small pat-button icon-plus-circle">{%- include patterns/i18n sentinel=false id="button_add_imp" -%}</em></span>
             </label>
             {% assign solution_nr = solution_nr | plus: 1 %}
         {% endfor %}
