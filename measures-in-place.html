@@ -38,18 +38,24 @@
                     {{ measure.label }}
             </label>
             {% if measure.description %}
+                {% unless measure.description == blank %}
+                    {% unless measure.description == nil %}
 <div 
     class="
         label-fragment-description 
         pat-rich"><pre class="pat-markdown">
 {{ measure.description }}</pre>
                 </div>
+                    {% endunless %}
+                {% endunless %}
             {% endif %}
         </div>
     {% endfor %}
     {% for measure in page.measures_in_place_user_added %}
         <div
-            class="clone label">
+            class="
+                clone 
+                label">
             <input
                 tabindex="0" 
                 type="checkbox"
@@ -57,7 +63,10 @@
                 disabled
                 checked />
             <div 
-                class="pat-rich-editor pat-rich toolbar-detached">
+                class="
+                    pat-rich-editor 
+                    pat-rich 
+                    toolbar-detached">
                 {% capture this_placeholder %}{{ site.data.oira.ui.describe_new_measure[site.lang] }}{% endcapture %}
                 {% include patterns/rich-editor.html
                     placeholder=this_placeholder
