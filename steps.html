@@ -34,7 +34,7 @@
         </li>
     <li 
         class="{% if page.number %}active{% endif %} {% if page.url contains 'read-only' %}disabled{% endif %}" 
-        id="step-2">
+        id="step-analysis">
 
       {% assign first_module = tool_contents | where: "number", "1.0" | first %}
 
@@ -55,7 +55,7 @@
 
         <div 
           class="topics" 
-          id="step-2-topics">
+          id="step-analysis-topics">
 
           {% if page.number %}
             {% assign pagelevel = page.number | split: '.' %}
