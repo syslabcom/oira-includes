@@ -22,9 +22,19 @@
                                             class="title">
                                             {{ item.title }}
                                         </span>
+                                        {% if item.tags %}
+                                            <span 
+                                                class="
+                                                    byline
+                                                    pat-comma-separated">
+                                                {% for tag in item.tags %}
+                                                    <span class="segment">{{ tag }}</span>
+                                                {% endfor %}
+                                            </span>
+                                        {% endif %}
                                         {% if item.summary %}
                                             <span 
-                                                class="byline">
+                                                class="description">
                                                 {{ item.summary }}
                                             </span>
                                         {% endif %}
