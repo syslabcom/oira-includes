@@ -1,0 +1,43 @@
+<!-- <oira-tool-table> -->
+    <table 
+        class="
+            oira-tool-table
+            pat-checklist
+            pat-table"
+        <tbody>
+            {% for item in site.tools %}
+                {% if item.layout == 'tool' %}
+                    <tr>
+                        <th 
+                            class="item-name">
+                            <label>
+                                <strong 
+                                    class="
+                                        value"> 
+                                    <span 
+                                        class="link-title">
+                                        <span 
+                                            class="title">
+                                            {{ item.title }}
+                                        </span>
+                                        {% if item.summary %}
+                                            <span 
+                                                class="byline">
+                                                {{ item.summary }}
+                                            </span>
+                                        {% endif %}
+                                    </span>
+                                </strong>
+                                <input 
+                                    name="{{ page.title | remove: 'label_' | slugify }}"
+                                    value="{{ item.value | slugify }}"
+                                    required
+                                    type="radio">
+                            </label>
+                        </th>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+<!-- </oira-tool-table> -->

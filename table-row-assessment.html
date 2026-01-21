@@ -1,0 +1,102 @@
+<!-- <oira-table-row-assessment> -->
+    <tr
+        class="
+        {% if item.state == 'Validated' %}validated locked{% endif %}
+        {% if item.state == 'Under review' %}under review{% endif %}
+        {% if item.state == 'Locked' %}locked{% endif %}
+        {% if item.archived %}archived{% endif %}">
+        {% if include.follow == false %}
+            <th 
+                class="item-name">
+                <label>
+                    <span 
+                        class="value"> 
+                        {{ item.name }}
+                    </span>
+                    <input 
+                        name="{{ page.title | remove: 'label_' | slugify }}"
+                        value="{{ item.value | slugify }}"
+                        required
+                        type="radio">
+                </label>
+            </th>
+        {% else %}
+            {% include oira/table-row-assessment-cell-name.html %}
+        {% endif %}
+        {% if include.show contains 'state' %}
+            <td 
+                data-title="{% include patterns/i18n sentinel=false id='label_status' %}"
+                class="item-status">
+                <span
+                    class="value">{% if item.state %}{{ item.state }},{% else %}{{ site.data.oira.ui.label_last_modified[lang] }}{% endif %}
+                    <time 
+                        class="value pat-display-time last-saved"
+                        data-pat-display-time="from-now: true;{% if site.data.config.lang %}locale: {{ site.data.config.lang }}{% endif %}"
+                        datetime="{{ item.last_updated }}T08:00Z">a few seconds ago</time>
+                </span>
+            </td>
+        {% endif %}
+        {% if include.show contains 'probe' %}
+            <td 
+                data-title="{%- include patterns/i18n sentinel=false id='label_status' -%}"
+                class="item-probe">
+                {% if item.probe %}
+                    <span 
+                        class="
+                            value 
+                            icon-eyedropper">{{ item.probe }}</span>
+                {% else %}
+                    Unknown
+                {% endif %}
+            </td>
+        {% endif %}
+        {% if include.show contains 'tool' %}
+            <td 
+                data-title="{% include patterns/i18n sentinel=false id='label_tool' %}"
+                class="item-tool">
+                {% if include.follow == false %}
+                    <span 
+                        class="value">
+                        {{ item.tool }}
+                    </span>
+                {% else %}
+                    <a 
+                        href="/tools/{{ item.tool | slugify }}#content" 
+                        class="
+                            value 
+                            pat-inject 
+                            tool 
+                            field"
+                        data-pat-inject="
+                            history: record">{{ item.tool }}</a>
+                {% endif %}
+            </td>
+        {% endif %}
+        {% if tool.publication %}
+            <td  
+                data-title="Publication">
+                <a 
+                    href="/preparation.html#publication-menu" 
+                    class="
+                        publication-menu 
+                        iconified 
+                        icon-published 
+                        pat-tooltip"
+                    data-pat-tooltip="source: ajax; position-list: tr">Published
+                    <time 
+                        class="pat-display-time" 
+                        data-pat-display-time="from-now: true"
+                        datetime="2018-03-28T08:00Z">2018-03-28</time>
+                </a>
+            </td>
+        {% endif %}
+        {% if include.icons %}       
+            <td 
+                class="functions">
+                {% include field-icons.html 
+                    %}
+                {%- include tooltip-status-sentinel.html -%}
+            </td>
+        {% endif %}
+    </tr>
+<!-- </oira-table-row-assessment> -->

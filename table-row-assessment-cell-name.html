@@ -1,0 +1,26 @@
+<!-- <oira-table-row-assessment-name> -->
+    <th 
+        class="item-name">
+        <a 
+            href="/ass-{{ item.name | slugify }}#content"
+            data-pat-inject="
+                source: #content; 
+                target: #content; 
+                    && 
+                source: #osc; 
+                target: #osc; 
+                history: record;"
+            data-pat-switch="
+                selector: #main; 
+                remove: sidebar-left-*; 
+                add: sidebar-left-open 
+                    && 
+                selector: #application-body-{{ layout.application }}; 
+                remove: focus-*; add: focus-sidebar"
+            class="
+                value 
+                pat-inject 
+                pat-switch
+                follow">{{ item.name }}</a>
+    </th>
+<!-- </oira-table-row-assessment-name> -->
