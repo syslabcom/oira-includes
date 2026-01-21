@@ -13,7 +13,16 @@
                             <label>
                                 <strong 
                                     class="
+                                        name
                                         value"> 
+                                    {% if item.icon %}
+                                        <img 
+                                            src="{{ item.icon }}" 
+                                            alt="" 
+                                            class="icon">
+                                    {% else %}
+                                        
+                                    {% endif %}
                                     <span 
                                         class="link-title">
                                         <span 
