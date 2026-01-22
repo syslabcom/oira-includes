@@ -1,10 +1,12 @@
 <!-- <oira-tool-table> -->
     <table 
+        id="panel-tool-table"
         class="
             oira-tool-table
             pat-checklist
-            pat-table"
-        <tbody>
+            pat-table">
+        <tbody
+            id="panel-tool-table-body">
             {% for item in site.tools %}
                 {% if item.layout == 'tool' %}
                     <tr>
@@ -50,6 +52,21 @@
                     </tr>
                 {% endif %}
             {% endfor %}
+            <tr
+                id="panel-tool-table-load-more">
+                <td 
+                    colspan="1">
+                    <a 	
+                        class="
+                            pat-inject 
+                            infinite-scrolling-trigger" 
+                        data-pat-inject="
+                            source: #panel-tool-table-body; 
+                            target: #panel-tool-table-load-more::element;
+                            trigger: autoload-visible"
+                        href="{{ page.url }}">{%- include patterns/i18n id="label_loading" -%}</a>
+                </td>
+            </tr>
         </tbody>
     </table>
 <!-- </oira-tool-table> -->
