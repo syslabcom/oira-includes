@@ -1,0 +1,15 @@
+{% comment %} <oira-help-button> {% endcomment %}
+    <a 
+        href="{{ item.url }}.html"
+        class="
+            pat-button 
+            icon-{{ item.icon }} 
+            pat-inject"
+        data-pat-inject="
+            scroll: top;
+            source: #content-pane;
+            target: #content-pane;
+            history: record">
+        {{ item.title }}
+    </a>
+{% comment %} </oira-help-button> {% endcomment %}
