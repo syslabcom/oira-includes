@@ -1,0 +1,32 @@
+<!-- <oira-validation-message> -->
+    {% if page.state == 'Validated' %}
+        {% include patterns/message.html class="success" content="message_you_reviewed_and_validated_risk_assessment" %}
+        {% comment %} 
+            <div 
+                class="pat-button-bar">
+                {% include patterns/open-modal.html
+                    label="label_retract_validation"
+                    href="/feedback/panel-unlock-validated-risk-assessment"
+                    class="pat-button" %}
+            </div>  
+        {% endcomment %}
+    {% elsif page.state == 'Under review' %}
+        {% include patterns/message.html class="notice" content="message_you_are_requested_to_validate_assessment" %}
+        {% include oira/history-well.html %}
+        <div 
+            class="
+                pat-button-bar 
+                pat-bumper" 
+            id="nav-bar">
+            <a 
+                href="/feedback/panel-validate-risk-assessment#document-content" 
+                data-pat-modal="class: small panel"
+                class="
+                    pat-modal 
+                    pat-button 
+                    default">{% include patterns/i18n id="label_validate_this_risk_assessment_imp" %}</a>
+        </div>
+    {% else %}
+        {% include patterns/message.html class="notice" content="message_no_validation_requested" %}
+    {% endif %}
+<!-- </oira-validation-message> -->
