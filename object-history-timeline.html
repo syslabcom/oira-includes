@@ -1,0 +1,91 @@
+<!-- <oira-object-history-timeline> -->
+    <ul 
+        class="
+            oira-object-history-timeline
+            object-history 
+            user-centric" 
+        id="{{ include.id }}">
+        {% for object in page.history %}
+            <li 
+                class="
+                    object {% if user.state == 'inactive' %}user-inactive{% endif %} 
+                    {% if object.mutation == 'registered sample' %}mutation-sampled {% if object.sample_passed == false %}sample-problem{% else %}sample-passed{% endif %}{% endif %}">
+                <a 
+                    class="
+                        meta
+                        {% unless user.state == 'inactive' %}
+                            close-panel
+                            pat-inject
+                        {% endunless %}
+                        " 
+                    {% unless user.state == 'inactive' %}
+                        data-pat-inject="
+                            history: record; 
+                            source: #content; 
+                            target: #content;"
+                        href="/users/{{ object.user | slugify }}"
+                    {% endunless %}>
+                    {% if object.avatar == false %}
+                        <img 
+                            src="/assets/oira/style/default-user.png" 
+                            alt="" 
+                            class="pat-avatar">
+                    {% else %}
+                        <img 
+                            src="/media/avatars/{{ object.user | slugify: "latin" }}.jpg" 
+                            alt="" 
+                            class="pat-avatar">
+                    {% endif %}
+                    <h4 
+                        class="user-name" 
+                        {% if object.state == 'inactive' %}
+                            title="{% include patterns/i18n id='message_user_no_longer_active' %}"
+                        {% endif %}>
+                        {{ object.user }}
+                    </h4>
+                </a>
+                <p 
+                    class="byline">
+                    <em 
+                        class="action"
+                        title="
+                            {% if object.mutation == 'registered sample' %}
+                            {% if object.sample_passed == false %}
+                                There were problems found with this sample
+                            {% else %}
+                                The sample passed
+                            {% endif %}{% endif %}">
+                            {{- object.mutation -}}
+                    </em> 
+                    | 
+                    <time 
+                        class="modification-date pat-display-time" 
+                        data-pat-display-time="from-now: true" 
+                        datetime="{{ object.time | default: '2018-10-03T09:20Z' }}" 
+                        title="{{ object.time }}">
+                        {{- object.time -}}
+                    </time>
+                    {% if object.function %}
+                        <form 
+                            class="pat-inject" 
+                            action="{{ page.url }}#document-body">
+                            <a 
+                                href="{{ page.url }}" 
+                                target="_blank" 
+                                title="View this revision">View</a> | <button type="submit" title="Revert to this revision" class="pat-button close-panel link">Revert</button>
+                        </form>
+                    {% endif %}
+                    {% if object.sample_subject %}
+                        <p class="message">
+                            <strong class="sample-date">{{ object.sample_date }}:</strong> <strong class="sample-subject">{{ object.sample_subject }}</strong>
+                            {% if object.sample_problem %}
+                                <br />
+                                {{ object.sample_problem }}
+                            {% endif %}
+                        </p>
+                    {% endif %}
+                </p>
+            </li>
+        {% endfor %}
+    </ul>
+<!-- </oira-object-history-timeline> -->
