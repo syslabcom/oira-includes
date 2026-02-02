@@ -1,0 +1,93 @@
+<!-- <oira-canvas-banner> -->
+    <div 
+        id="canvas-banner" 
+        class="
+            oira-canvas-banner
+            canvas-banner">
+        <article
+            class="banner-body">
+            <a 
+                href="{{ include.url | default: '/preferences' }}"
+                class="pat-inject image-link">
+                <img 
+                    alt="" 
+                    src="{{ include.image }}">
+            </a>
+            <section
+                class="banner-text">
+                <p
+                    class="float-after banner-counter">
+                    {{ forloop.index }}/{{ forloop.length }}
+                </p>
+                <p>
+                    {{ include.content }}
+                    {% if include.link == 'preferences' %}
+                        <a 
+                            href="{{ include.url | default: '/preferences' }}#content"
+                            class="pat-inject">personal preferences page</a>.
+                    {% endif %}
+                </p>
+                <form
+                    action="/index-logged-in#content"
+                    class="button-bar pat-inject">
+                    <a 
+                        data-pat-inject="
+                            source: #content; 
+                            target: #content; 
+                            history: record; 
+                            {% if include.scroll %}scroll: #{{ include.scroll }}{% endif %}"
+                        href="{{ include.url | default: '/preferences' }}"
+                        class="
+                            pat-inject 
+                            pat-button 
+                            default">{% include patterns/i18n id=include.cta %}</a>
+                    <button 
+                        type="submit"
+                        name="hide_banner" 
+                        class="pat-button">{% include patterns/i18n id="label_hide_this_message_imp" %}</button>
+                    {% if include.help %}
+                        <a 
+                            data-pat-inject="
+                                scroll: top; 
+                                history: record"
+                            href="/assets/oira/help/en-roadmap/pages/{{ include.help }}" 
+                            class="
+                                pat-inject 
+                                pat-button 
+                                no-label 
+                                icon-help">{% include patterns/i18n id="label_help" %}</a>
+                    {% endif %}
+
+                    <div 
+                        class="
+                            float-after 
+                            button-set 
+                            clustered">
+                        <a 
+                            {% unless forloop.first %}
+                                href="#banner-{{ forloop.index | minus: 1 }}"
+                                data-pat-inject="target: #canvas-banner"
+                            {% endunless %}
+                            class="
+                                {% unless forloop.first %}pat-inject {% endunless %}
+                                pat-button 
+                                no-label 
+                                icon 
+                                icon-angle-left">{% include patterns/i18n id="patterns.label_previous" %}</a>
+                        <a 
+                            {% unless forloop.last %}
+                                href="#banner-{{ forloop.index | plus: 1 }}"
+                                data-pat-inject="target: #canvas-banner"
+                            {% endunless %}
+                            class="
+                                {% unless forloop.last %}pat-inject {% endunless %}
+                                pat-button 
+                                no-label 
+                                icon 
+                                icon-angle-right">{% include patterns/i18n id="patterns.label_next" %}</a>
+                    </div>
+                </form>
+            </section>
+        </article>
+    </div>
+<!-- </oira-canvas-banner> -->
