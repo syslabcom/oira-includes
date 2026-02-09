@@ -84,7 +84,7 @@
         <a {% unless page.url contains "read-only" %}href="/{{ page.ra }}/action-plan#content"{% endunless %}
             data-pat-inject="history: record"
             class="action-plan pat-switch pat-inject"
-            data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off">{%- include patterns/i18n sentinel=false id="label_action_plan" -%}</a>
+            data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off">{%- include patterns/i18n id="label_action_plan" -%}</a>
         {% if page.url contains 'action-plan' %}
           <div class="topics" id="step-4-topics">
               <ol class="questions">
@@ -123,12 +123,12 @@
         <a class="report pat-switch pat-inject"
             data-pat-inject="history: record"
             data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off"
-            href="/{{ page.ra }}/report#content">{%- include patterns/i18n sentinel=false id="label_report" -%}</a>
+            href="/{{ page.ra }}/report#content">{%- include patterns/i18n id="label_report" -%}</a>
       {% else %}
         <a class="report pat-switch pat-inject"
             data-pat-inject="history: record"
             data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off"
-            href="/{{ page.ra }}/report#content">{%- include patterns/i18n sentinel=false id="label_report" -%}</a>
+            href="/{{ page.ra }}/report#content">{%- include patterns/i18n id="label_report" -%}</a>
       {% endif %}
     </li>
 
@@ -137,7 +137,7 @@
         <a href="/{{ page.ra }}/training#content"
             class="training pat-inject pat-switch"
             data-pat-inject="history: record"
-            data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off">{%- include patterns/i18n sentinel=false id="label_training" -%}</a>
+            data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off">{%- include patterns/i18n id="label_training" -%}</a>
       </li>
     {% endif %}
   {% endunless %}
@@ -148,7 +148,7 @@
         <a href="/{{ page.ra }}/status#content"
             data-pat-inject="history: record"
             class="status pat-switch pat-inject"
-            data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off">{%- include patterns/i18n sentinel=false id="label_status" -%}
+            data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off">{%- include patterns/i18n id="label_status" -%}
           <!-- <strong class="pie-graph {% if page.completed <= 10 %}pat-tooltip{% endif %}"
               data-pat-tooltip="trigger: hover; position-list: lm"
               data-percentage="{% if page.completed %}{{ page.completed }}{% else %}57{% endif %}"
@@ -192,7 +192,7 @@
               href="/assessments#content"
               data-pat-inject="history: record"
               class="home pat-switch pat-inject"
-              data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off">{%- include patterns/i18n sentinel=false id="label_exit" -%}</a>
+              data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off">{%- include patterns/i18n id="label_exit" -%}</a>
       </li>
       {% comment %}
       <li 
@@ -202,7 +202,7 @@
               href="/help.html#content" 
               data-pat-inject="history: record" 
               class="help pat-switch pat-inject" 
-              data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off">{%- include patterns/i18n sentinel=false id="label_help" -%}</a>
+              data-pat-switch="selector: #main; remove: sidebar-*; add: sidebar-off">{%- include patterns/i18n id="label_help" -%}</a>
       </li>
       {% endcomment %}
     {% endunless %}
