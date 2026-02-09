@@ -38,7 +38,9 @@
                     </h2>
                     {% if item.tags %}
                         <p 
-                            class="tool-tags tag-cloud">
+                            class="
+                                tool-tags 
+                                tag-cloud">
                             {% for tag in item.tags %}
                                 {% if include.mode == "edit" %}
                                     <span 
@@ -64,36 +66,46 @@
                         <div 
                             class="button-bar">
                             <a 
-                                href="{{ item.url | replace: 'index','edit' }}#application-body-{{ layout.application }}"
+                                href="{{ item.url | replace: 'index','edit' }}#application-body-{{ layout.application | sluigify }}"
                                 data-pat-inject="
                                     history: record"
                                 data-pat-switch="
-                                    selector: #application-body-{{ layout.application }};
+                                    selector: #application-body-{{ layout.application | slugify }};
                                     remove: sidebar-left-*;
                                     add: sidebar-left-open"
-                                class="default pat-button pat-inject pat-switch">{%- include patterns/i18n sentinel=false id="label_edit_imp" -%}</a>
+                                class="
+                                    default 
+                                    pat-button 
+                                    pat-inject 
+                                    pat-switch">{%- include patterns/i18n sentinel=false id="label_edit_imp" -%}</a>
                             <button 
                                 type="submit" 
                                 name="tool-button" 
                                 value="test-tool" 
                                 class="pat-button">{%- include patterns/i18n sentinel=false id="label_test_imp" -%}</button>
-                            <!-- <a 
-                                class= pat-button pat-inject" 
+                            {% comment %} <a 
+                                class="pat-button pat-inject"
                                 data-pat-inject="history: record"
-                                href="{{ item.url }}#content">Information</a> -->
+                                href="{{ item.url }}#content">Information</a> {% endcomment %}
                         </div> 
                     {% else %}
                         <form 
-                            class="button-bar pat-inject"
+                            class="
+                                button-bar 
+                                pat-inject"
                             action="/preparation#main"
                             data-pat-inject="history: record">
                             <button 
                                 type="submit" 
                                 name="tool-button" 
                                 value="edit-tool" 
-                                class="default pat-button">{%- include patterns/i18n sentinel=false id="label_start_ra" -%}</button>
+                                class="
+                                    default 
+                                    pat-button">{%- include patterns/i18n sentinel=false id="label_start_ra" -%}</button>
                             <a 
-                                class= pat-button pat-inject" 
+                                class="
+                                    pat-button 
+                                    pat-inject" 
                                 data-pat-inject="history: record"
                                 href="{{ item.url }}#content">Information</a>
                         </form>  
