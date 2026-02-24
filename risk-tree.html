@@ -9,11 +9,12 @@
                             class="
                                 {% if module.layout contains 'module' %}
                                     module
-                                {% else %}
+                                {% elsif module.layout contains 'profile-question' %}
                                     profile-question
                                 {% endif %} 
                                 pat-inject"
-                            data-pat-inject="history: record"
+                            data-pat-inject="
+                                    history: record"
                             href="{{ module.url }}#document-body-{{ layout.application }}">
                             <span 
                                 class="title">
@@ -27,12 +28,17 @@
                                         <li>
                                             {% if sub.layout contains 'module' %}
                                                 {% assign this_type = 'module' %}
+                                            {% elsif sub.layout contains 'profile-question' %}
+                                                {% assign this_type = 'profile-question' %}
                                             {% else %}
                                                 {% assign this_type = 'risk' %}
                                             {% endif %}
                                             <a 
-                                                class="{{ this_type }} pat-inject"
-                                                data-pat-inject="history: record"
+                                                class="
+                                                    {{ this_type }} 
+                                                    pat-inject"
+                                                data-pat-inject="
+                                                    history: record"
                                                 href="{{ sub.url }}#document-body-{{ layout.application }}">
                                                 <span 
                                                     class="title">
