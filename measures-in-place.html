@@ -93,10 +93,13 @@
         cloning">
     <button
         tabindex="0" 
-        class="add-clone pat-button icon-plus"
+        class="
+            add-clone 
+            pat-button 
+            icon-plus"
         id="clone-existing-measure"
         title="Add another measure"
-        type="button">{% if page.measures_in_place %}{{ site.data.oira.ui.add_missing_existing_measure[site.lang] }}{% else %}{{ site.data.oira.ui.add_existing_measure[site.lang] }}{% endif %}</button>
+        type="button">{% if page.measures_in_place %}{% include patterns/i18n id="oira.add_missing_existing_measure" %}{% else %}{% include patterns/i18n id="oira.add_existing_measure" %}{% endif %}</button>
 </div>
 
 <template 
@@ -110,7 +113,7 @@
             checked />
         <div 
             class="pat-rich-editor pat-rich toolbar-detached">
-            {% capture this_placeholder %}{{ site.data.oira.ui.describe_new_measure[site.lang] }}{% endcapture %}
+            {% capture this_placeholder %}{% include patterns/i18n id="oira.describe_new_measure" %}{% endcapture %}
             {% include patterns/rich-editor.html
                 autofocus=true
                 textarea_name="measure-rich-1"
@@ -122,7 +125,7 @@
         </div>
         <button
             class="icon-trash iconified remove-clone"
-            title="{{ site.data.oira.ui.remove_measure[site.lang] }}">{{ site.data.oira.ui.remove[site.lang] }}</button>
+            title="{% include patterns/i18n id="oira.remove_measure" %}">{% include patterns/i18n id="oira.remove" %}</button>
     </fieldset>
 </template>
 

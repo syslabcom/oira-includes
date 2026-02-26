@@ -204,16 +204,23 @@ It has roots in a piece of classical Latin literature from 45 BC, making it over
     {% if page.solutions %}
         <button 
             tabindex="0" 
-            class="pat-button icon-plus pat-depends visible" 
+            class="
+                pat-button 
+                icon-plus 
+                pat-depends 
+                visible" 
             data-pat-depends="condition: not (sm-1 and sm-2 and sm-3 and sm-4)" 
             id="add-standard-measures" 
             title="Add another measure" 
-            type="button">{%- include patterns/i18n source="oira" id="label_select_standard_measures" -%}</button>
+            type="button">{%- include patterns/i18n id="oira.label_select_standard_measures" -%}</button>
     {% endif %}
     <button 
         tabindex="0" 
-        class="add-clone pat-button icon-plus" 
+        class="
+            add-clone 
+            pat-button 
+            icon-plus" 
         id="clone-extra-measure" 
         title="Add another measure" 
-        type="button">{%- include patterns/i18n source="oira" id="label_extra_add_measure" -%}</button>
+        type="button">{%- include patterns/i18n id="oira.label_extra_add_measure" -%}</button>
 </div>
