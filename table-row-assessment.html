@@ -28,7 +28,7 @@
                 data-title="{% include patterns/i18n sentinel=false id='label_status' %}"
                 class="item-status">
                 <span
-                    class="value">{% if item.state %}{{ item.state }},{% else %}{{ site.data.oira.ui.label_last_modified[lang] }}{% endif %}
+                    class="value">{% if item.state %}{{ item.state }},{% else %}{% include patterns/i18n id="oira.label_last_modified" %}{% endif %}
                     <time 
                         class="value pat-display-time last-saved"
                         data-pat-display-time="from-now: true;{% if site.data.config.lang %}locale: {{ site.data.config.lang }}{% endif %}"

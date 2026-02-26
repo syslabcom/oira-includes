@@ -76,12 +76,12 @@
 
           <ul 
               class="legend">
-              <li class="unvisited">{{ site.data.oira.ui.unanswered[lang] }}</li>
-              <li class="postponed">{{ site.data.oira.ui.postponed[lang] }}</li>
-              <li class="no-risk">{{ site.data.oira.ui.no_risk[lang] }}</li>
-              <li class="answered risk">{{ site.data.oira.ui.identified[lang] }}</li>
+              <li class="unvisited">{% include patterns/i18n id="oira.unanswered" %}</li>
+              <li class="postponed">{% include patterns/i18n id="oira.postponed" %}</li>
+              <li class="no-risk">{% include patterns/i18n id="oira.no_risk" %}</li>
+              <li class="answered risk">{% include patterns/i18n id="oira.identified" %}</li>
               {% if site.data.brands[site.brand].additional_status_information contains 'overall_statistics' %}
-                  <li class="answered risk measures">{{ site.data.oira.ui.identified_with_measures[lang] }}</li>
+                  <li class="answered risk measures">{% include patterns/i18n id="oira.identified_with_measures" %}</li>
               {% endif %}
           </ul>
 
@@ -134,7 +134,7 @@
               </ol>
 
             <ul class="legend">
-              <li class="answered risk">{{ site.data.oira.ui.identified[lang] }}</li>
+              <li class="answered risk">{% include patterns/i18n id="oira.identified" %}</li>
             </ul>
           </div>
         {% endif %}

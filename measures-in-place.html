@@ -67,7 +67,7 @@
                     pat-rich-editor 
                     pat-rich 
                     toolbar-detached">
-                {% capture this_placeholder %}{{ site.data.oira.ui.describe_new_measure[site.lang] }}{% endcapture %}
+                {% capture this_placeholder %}{% include patterns/i18n id="oira.describe_new_measure[site.lang] }}{% endcapture %}
                 {% include patterns/rich-editor.html
                     placeholder=this_placeholder
                     toolbar="assessment-toolbar"
@@ -82,7 +82,7 @@
                     icon-trash 
                     iconified 
                     remove-clone"
-                title="{{ site.data.oira.ui.remove_measure[site.lang] }}">{{ site.data.oira.ui.remove[site.lang] }}</button>
+                title="{% include patterns/i18n id="oira.remove_measure" %}">{% include patterns/i18n id="oira.remove" %}</button>
         </div>
     {% endfor %}
 </fieldset>
@@ -132,7 +132,7 @@
 <fieldset
     class="pat-checklist radio">
     <legend>
-        {{ site.data.oira.ui.question_measures_sufficient[site.lang] }}
+        {% include patterns/i18n id="oira.question_measures_sufficient" %}
     </legend>
     <label
         class="no">
@@ -143,7 +143,7 @@
             value="no"
             {% if page.classes contains 'answered' and page.classes contains 'risk' %}checked="checked"{% endif %}
         />
-        {{ site.data.oira.ui.no_measures_required[site.lang] }}
+        {% include patterns/i18n id="oira.no_measures_required" %}
     </label>
     <label
         class="yes">
@@ -157,7 +157,7 @@
                 {% if page.classes contains 'answered' %}checked="checked"{% endif %}
             {% endif %}
         />
-        {{ site.data.oira.ui.yes_acceptable[site.lang] }}
+        {% include patterns/i18n id="oira.yes_acceptable" %}
     </label>
     <label
         class="not-applicable">
@@ -167,6 +167,6 @@
             name="answer"
             value="na"
             {% if page.classes contains 'postponed' %}checked{% endif %} />
-        {{ site.data.oira.ui.not_applicable[site.lang] }}
+        {% include patterns/i18n id="oira.not_applicable" %}
     </label>
 </fieldset>

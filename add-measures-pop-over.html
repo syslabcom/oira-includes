@@ -12,12 +12,12 @@
         condition: not (sm-1 and sm-2 and sm-3 and sm-4)">
     <h2 
         class="title">
-        {{ site.data.oira.ui.label_standard_measures[lang] }}
+        {% include patterns/i18n id="oira.label_standard_measures" %}
     </h2>
     <section 
         class="pat-rich description">
         <p>
-            {{ site.data.oira.ui.label_select_measure[lang] }}
+            {% include patterns/i18n id="oira.label_select_measure" %}
         </p>
     </section>
     <div 

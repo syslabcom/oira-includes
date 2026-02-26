@@ -10,7 +10,7 @@
         <div 
             class="measure pat-collapsible closed">
             <h2>
-                {{ site.data.oira.ui.label_implemented_measure[lang] }}: Visual inspection of work areas
+                {% include patterns/i18n id="oira.label_implemented_measure" %}": Visual inspection of work areas
             </h2>
             <h4>
                 Description
@@ -55,7 +55,7 @@ It has roots in a piece of classical Latin literature from 45 BC, making it over
                     href="#pick-sm-{{ solution_nr }}"
                     class="icon-trash pat-forward"
                     data-pat-forward="selector: #sm-{{ solution_nr }}"
-                    title="Remove this measure.">Remove</a>
+                    title="Remove this measure.">{% include patterns/i18n id="patterns.label_remove_imp" %}</a>
             </p>
             <section 
                 class="pat-rich">
@@ -85,7 +85,7 @@ It has roots in a piece of classical Latin literature from 45 BC, making it over
                 pat-collapsible 
                 {% if extra.state == 'open' %}open{% else %}closed{% endif %}">
             <h2>
-                {{ site.data.oira.ui.label_addition_measure[lang] }} {{ extra_nr }}
+                {% include patterns/i18n id="oira.label_addition_measure" %}
             </h2>
             <p 
                 class="functions">
@@ -94,12 +94,12 @@ It has roots in a piece of classical Latin literature from 45 BC, making it over
                     href="#pick-sm-{{ extra_nr }}"
                     class="icon-trash pat-forward"
                     data-pat-forward="selector: #sm-{{ extra_nr }}"
-                    title="Remove this measure.">{{ site.data.oira.ui.remove[lang] }}</a>
+                    title="Remove this measure.">{% include patterns/i18n id="patterns.label_remove_imp" %}</a>
             </p>
             <fieldset 
                 class="vertical" id="fields-#{1}">
                 <label>
-                    {{ site.data.oira.ui.label_description[lang] }}
+                    {% include patterns/i18n id="oira.label_description" %}
                     <dfn 
                         class="info-icon pat-tooltip"
                         data-pat-tooltip="source: content; position-list: lt">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</dfn>
@@ -118,7 +118,7 @@ It has roots in a piece of classical Latin literature from 45 BC, making it over
                         content=these_notes %}
                 </label>
                 <label>
-                    {{ site.data.oira.ui.label_expertise[lang] }}
+                    {% include patterns/i18n id="oira.label_expertise" %}
                     <textarea 
                         tabindex="0" 
                         class="requirements"
@@ -137,12 +137,12 @@ It has roots in a piece of classical Latin literature from 45 BC, making it over
     id="extra-measure-template">
     <div 
         class="measure pat-collapsible">
-        <h2>{{ site.data.oira.ui.label_addition_measure[lang] }} #{1}</h2>
+        <h2>{% include patterns/i18n id="oira.label_addition_measure" %}</h2>
         <p 
             class="functions">
             <a 
                 class="icon-trash remove-clone"
-                title="Remove this measure.">{{ site.data.oira.ui.remove[lang] }}</a>
+                title="Remove this measure.">{% include patterns/i18n id='patterns.label_remove_imp' %}</a>
         </p>
 
         <fieldset 
@@ -151,7 +151,7 @@ It has roots in a piece of classical Latin literature from 45 BC, making it over
             <fieldset
                 class="group">
                 <legend>
-                    {{ site.data.oira.ui.label_description[lang] }}
+                    {% include patterns/i18n id="oira.label_description" %}
                     <dfn 
                         class="info-icon pat-tooltip"
                         data-pat-tooltip="source: content; position-list: lt">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</dfn> 
@@ -175,7 +175,7 @@ It has roots in a piece of classical Latin literature from 45 BC, making it over
             </fieldset>
             <fieldset
                 class="group">
-                <legend>{{ site.data.oira.ui.label_expertise[lang] }}</legend>
+                <legend>{% include patterns/i18n id="oira.label_expertise" %}</legend>
                 {% capture these_notes %}{{ page.notes | markdownify }}{% endcapture %}
                 <div 
                     class="

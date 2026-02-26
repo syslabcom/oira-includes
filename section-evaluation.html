@@ -7,45 +7,45 @@
         </p>
         <p 
             class="instruction">
-            {{ site.data.oira.ui.description_calculated_evaluation[site.data.config.lang] }}
+            {% include patterns/i18n id="oira.description_calculated_evaluation" %}
         </p>
         <fieldset 
             class="pat-checklist radio">
             <legend>
-                {{ site.data.oira.ui.header_risk_probability[site.data.config.lang] }}
+                {% include patterns/i18n id="oira.header_risk_probability" %}
                 <dfn 
                     class="
                         info-icon 
                         pat-tooltip" 
                     data-pat-tooltip="source: content; position-list: lt">Indicate how likely occurence of this risk is in a normal situation.</dfn>
             </legend>
-            <label><input type="radio" tabindex="0" name="type" value="small" checked="checked" /> {{ site.data.oira.ui.label_small[site.data.config.lang] }}</label>
-            <label><input type="radio" tabindex="0" name="type" value="medium" /> {{ site.data.oira.ui.label_medium[site.data.config.lang] }}</label>
-            <label><input type="radio" tabindex="0" name="type" value="large" /> {{ site.data.oira.ui.label_large[site.data.config.lang] }}</label>
+            <label><input type="radio" tabindex="0" name="type" value="small" checked="checked" /> {% include patterns/i18n id="oira.label_small" %}</label>
+            <label><input type="radio" tabindex="0" name="type" value="medium" /> {% include patterns/i18n id="oira.label_medium" %}</label>
+            <label><input type="radio" tabindex="0" name="type" value="large" /> {% include patterns/i18n id="oira.label_large" %}</label>
         </fieldset>
         <fieldset 
             class="
                 pat-checklist 
                 radio">
             <legend>
-                {{ site.data.oira.ui.header_risk_frequency[site.data.config.lang] }}
+                {% include patterns/i18n id="oira.header_risk_frequency" %}
                 <dfn class="info-icon pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Indicate how often this risk occurs in a normal situation.</dfn>
             </legend>
-            <label><input type="radio" tabindex="0" name="exposed" value="am" /> {{ site.data.oira.ui.label_almost_never[site.data.config.lang] }}</label>
-            <label><input type="radio" tabindex="0" name="exposed" value="re" checked="checked"  /> {{ site.data.oira.ui.label_regularly[site.data.config.lang] }}</label>
-            <label><input type="radio" tabindex="0" name="exposed" value="co" /> {{ site.data.oira.ui.label_constantly[site.data.config.lang] }}</label>
+            <label><input type="radio" tabindex="0" name="exposed" value="am" /> {% include patterns/i18n id="oira.label_almost_never" %}</label>
+            <label><input type="radio" tabindex="0" name="exposed" value="re" checked="checked"  /> {% include patterns/i18n id="oira.label_regularly" %}</label>
+            <label><input type="radio" tabindex="0" name="exposed" value="co" /> {% include patterns/i18n id="oira.label_constantly" %}</label>
         </fieldset>
         <fieldset 
             class="
                 pat-checklist 
                 radio">
             <legend>
-                {{ site.data.oira.ui.header_risk_severity[site.data.config.lang] }}
+                {% include patterns/i18n id="oira.header_risk_severity" %}
                 <dfn class="info-icon pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Indicate the default severity of this risk occurs.</dfn>
             </legend>
-            <label><input type="radio" tabindex="0" name="effect" value="ws" /> {{ site.data.oira.ui.label_weak_severity[site.data.config.lang] }}</label>
-            <label><input type="radio" tabindex="0" name="effect" value="ss" /> {{ site.data.oira.ui.label_significant_severity[site.data.config.lang] }}</label>
-            <label><input type="radio" tabindex="0" name="effect" value="hs" checked="checked"  /> {{ site.data.oira.ui.label_high_severity[site.data.config.lang] }}</label>
+            <label><input type="radio" tabindex="0" name="effect" value="ws" /> {% include patterns/i18n id="oira.label_weak_severity" %}</label>
+            <label><input type="radio" tabindex="0" name="effect" value="ss" /> {% include patterns/i18n id="oira.label_significant_severity" %}</label>
+            <label><input type="radio" tabindex="0" name="effect" value="hs" checked="checked"  /> {% include patterns/i18n id="oira.label_high_severity" %}</label>
         </fieldset>
     {% elsif page.evaluation_method == 'risk_estimated'  %}
         <p 
@@ -56,16 +56,16 @@
             class="
                 pat-checklist 
                 radio">
-            <legend>{{ site.data.oira.ui.label_select_risk_priority[site.data.config.lang] }}</legend>
-            <label><input type="radio" tabindex="0" name="chance" value="low" /> {{ site.data.oira.ui.label_low[site.data.config.lang] }}</label>
-            <label><input type="radio" tabindex="0" name="chance" value="medium" /> {{ site.data.oira.ui.label_medium[site.data.config.lang] }}</label>
-            <label><input type="radio" tabindex="0" name="chance" value="high" checked="checked" /> {{ site.data.oira.ui.label_high[site.data.config.lang] }}</label>
+            <legend>{% include patterns/i18n id="oira.label_select_risk_priority" %}</legend>
+            <label><input type="radio" tabindex="0" name="chance" value="low" /> {% include patterns/i18n id="oira.label_low" %}</label>
+            <label><input type="radio" tabindex="0" name="chance" value="medium" /> {% include patterns/i18n id="oira.label_medium" %}</label>
+            <label><input type="radio" tabindex="0" name="chance" value="high" checked="checked" /> {% include patterns/i18n id="oira.label_high" %}</label>
         </fieldset>
     {% else %}
         {% unless tool.integrated_actionplan==true %}
             <!-- The next line is required only in stand alone action plan mode. -->
             <p>
-                {{ site.data.oira.ui.description_automatic_evaluation[site.data.config.lang] }}
+                {% include patterns/i18n id="oira.description_automatic_evaluation" %}
             </p>
         {% endunless %}
     {% endif %}

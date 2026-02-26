@@ -2,7 +2,7 @@
 <fieldset 
     class="vertical">
     <label>
-        {{ site.data.oira.ui.label_action_plan_responsible[lang] }}
+        {% include patterns/i18n id="oira.label_action_plan_responsible" %}
         <dfn 
             class="info-icon pat-tooltip" data-pat-tooltip="source: content; position-list: lt">Appoint someone in your company to be responsible for the implementation of this measure. This person will have the authority to take the steps described in the Plan and/or the responsibility to ensure that they are carried out.</dfn>
         <input 
@@ -12,7 +12,7 @@
     </label>
     <label 
         class="currency">
-        {{ site.data.oira.ui.label_action_plan_budget[lang] }}
+        {% include patterns/i18n id="oira.label_action_plan_budget" %}
         <dfn 
             class="info-icon pat-tooltip" 
             data-pat-tooltip="source: content; position-list: lt">Although some measures do not cost any money, most do. The measures should therefore be budgeted for; include them in the annual budget round if necessary.</dfn>
@@ -25,7 +25,7 @@
             data-pat-validation="message-max: More than 66 is too much!" />
     </label>
     <label>
-        {{ site.data.oira.ui.label_action_plan_start[lang] }}
+        {% include patterns/i18n id="oira.label_action_plan_start" %}
         <input 
             type="date" 
             name="planning-start"
@@ -36,7 +36,7 @@
         />
     </label>
     <label>
-        {{ site.data.oira.ui.label_action_plan_end[lang] }}
+        {% include patterns/i18n id="oira.label_action_plan_end" %}
         <input 
             type="date" 
             name="planning-end"
