@@ -67,7 +67,7 @@
                     pat-rich-editor 
                     pat-rich 
                     toolbar-detached">
-                {% capture this_placeholder %}{% include patterns/i18n id="oira.describe_new_measure[site.lang] }}{% endcapture %}
+                {% capture this_placeholder %}{% include patterns/i18n id="oira.describe_new_measure" sentinel=false %}{% endcapture %}
                 {% include patterns/rich-editor.html
                     placeholder=this_placeholder
                     toolbar="assessment-toolbar"
