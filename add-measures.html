@@ -97,13 +97,14 @@ It has roots in a piece of classical Latin literature from 45 BC, making it over
                     title="Remove this measure.">{% include patterns/i18n id="patterns.label_remove_imp" %}</a>
             </p>
             <fieldset 
-                class="vertical" id="fields-#{1}">
+                class="vertical" 
+                id="fields-#{1}">
                 <label>
                     {% include patterns/i18n id="oira.label_description" %}
                     <dfn 
                         class="info-icon pat-tooltip"
                         data-pat-tooltip="source: content; position-list: lt">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</dfn>
-                    {% capture this_placeholder %}{% include patterns/i18n id="placeholder_comment" %}{% endcapture %}
+                    {% capture this_placeholder %}{% include patterns/i18n sentinel=false id="placeholder_comment" %}{% endcapture %}
                     {% capture these_notes %}{{ page.notes | markdownify }}{% endcapture %}
                     {% include patterns/rich-editor.html
                         placeholder=this_placeholder
@@ -156,7 +157,7 @@ It has roots in a piece of classical Latin literature from 45 BC, making it over
                         class="info-icon pat-tooltip"
                         data-pat-tooltip="source: content; position-list: lt">Describe: 1) what is your general approach to eliminate or (if the risk is not avoidable) reduce the risk; 2) the specific action(s) required to implement this approach (to eliminate or to reduce the risk); 3) the level of expertise needed to implement the measure, for instance “common sense (no OSH knowledge required)”, “no specific OSH expertise, but minimum OSH knowledge or training and/or consultation of OSH guidance required”, or “OSH expert”. You can also describe here any other additional requirement (if any).</dfn> 
                 </legend>                   
-                {% capture this_placeholder %}{% include patterns/i18n id="placeholder_approach_action_plan" %}{% endcapture %}
+                {% capture this_placeholder %}{% include patterns/i18n sentinel=false id="placeholder_approach_action_plan" %}{% endcapture %}
                 {% capture these_notes %}{{ page.notes | markdownify }}{% endcapture %}
                 <div 
                     class="pat-rich-editor pat-rich toolbar-detached">
@@ -193,9 +194,8 @@ It has roots in a piece of classical Latin literature from 45 BC, making it over
                         tags-menu="/feedback/panel-tags-tiptap#document-content"
                         autofocus=false %}
             </fieldset>
-        </fieldset>
-
-        {% include oira/add-measure-additional-meta-data.html %}
+            {% include oira/add-measure-additional-meta-data.html %}
+        </fieldset>      
     </div>
 </template>
 
