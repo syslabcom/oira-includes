@@ -15,7 +15,7 @@
                 remove: sidebar-left-*; 
                 add: sidebar-left-open 
                     && 
-                selector: #application-body-{{ layout.application }}; 
+                selector: #application-body-{{ layout.application | slugify }}; 
                 remove: focus-*; add: focus-sidebar"
             class="
                 value 

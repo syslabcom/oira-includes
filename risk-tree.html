@@ -15,7 +15,7 @@
                                 pat-inject"
                             data-pat-inject="
                                     history: record"
-                            href="{{ module.url }}#document-body-{{ layout.application }}">
+                            href="{{ module.url }}#document-body-{{ layout.application | slugify }}">
                             <span 
                                 class="title">
                                 {{ module.title }}
@@ -39,7 +39,7 @@
                                                     pat-inject"
                                                 data-pat-inject="
                                                     history: record"
-                                                href="{{ sub.url }}#document-body-{{ layout.application }}">
+                                                href="{{ sub.url }}#document-body-{{ layout.application | slugify }}">
                                                 <span 
                                                     class="title">
                                                     {{ sub.title }}

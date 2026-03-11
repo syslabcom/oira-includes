@@ -15,7 +15,7 @@
                 <a 
                     class="pat-inject" 
                     data-pat-inject="history: record"
-                    href="{{ item.url }}#document-body-{{ layout.application }}">
+                    href="{{ item.url }}#document-body-{{ layout.application | slugify }}">
                     <figure
                         class="tool-icon">
                         {% if item.icon %}
@@ -32,7 +32,7 @@
                          <a 
                             class="pat-inject" 
                             data-pat-inject="history: record"
-                            href="{{ item.url }}#document-body-{{ layout.application }}">
+                            href="{{ item.url }}#document-body-{{ layout.application | slugify }}">
                             {{ item.title }}
                         </a>
                     </h2>
