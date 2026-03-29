@@ -1,4 +1,4 @@
-<!-- <oira-help-icon> -->
+<oira-help-icon>
     {% for item in site.pages %}
         {% if item.layout == 'help-text' and item.title == include.name and item.path contains 'roadmap' %}
             <a 
@@ -16,4 +16,4 @@
                 href="{{ item.url }}">{% include patterns/i18n id="label_help" %}</a>
         {% endif %}
     {% endfor %}
-<!-- </oira-help-icon> -->
+</oira-help-icon>
