@@ -12,7 +12,16 @@
                                 {% elsif module.layout contains 'profile-question' %}
                                     profile-question
                                 {% endif %} 
-                                pat-inject"
+                                pat-inject
+                                pat-switch"
+                            data-pat-switch="
+                                selector: .application-body.state-on;
+                                remove: sidebar-large;
+                                add: sidebar-normal;
+                                  &&
+                                selector: .application-body.state-on;
+                                remove: focus-sidebar;
+                                add: focus-document;"
                             data-pat-inject="
                                     history: record"
                             href="{{ module.url }}#document-body-{{ layout.application | slugify }}">
@@ -36,7 +45,16 @@
                                             <a 
                                                 class="
                                                     {{ this_type }} 
-                                                    pat-inject"
+                                                    pat-inject
+                                                    pat-switch"
+                                                data-pat-switch="
+                                                    selector: .application-body.state-on;
+                                                    remove: sidebar-large;
+                                                    add: sidebar-normal;
+                                                    &&
+                                                    selector: .application-body.state-on;
+                                                    remove: focus-sidebar;
+                                                    add: focus-document;"
                                                 data-pat-inject="
                                                     history: record"
                                                 href="{{ sub.url }}#document-body-{{ layout.application | slugify }}">
