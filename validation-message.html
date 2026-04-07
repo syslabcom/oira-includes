@@ -19,12 +19,12 @@
                 pat-bumper" 
             id="nav-bar">
             <a 
-                href="/dialogues/panel-validate-risk-assessment#document-content" 
-                data-pat-modal="class: small panel"
+                href="/dialogues/panel-validate-risk-assessment#document-content"
                 class="
-                    pat-modal 
+                    pat-inject 
                     pat-button 
-                    default">{% include patterns/i18n id="label_validate_this_risk_assessment_imp" %}</a>
+                    default"
+                data-pat-inject="source: #pat-modal-panel-space; target: #pat-modal-panel-space; url: /dialogues/panel-validate-risk-assessment#document-content;">{% include patterns/i18n id="label_validate_this_risk_assessment_imp" %}</a>
         </div>
     {% else %}
         {% include patterns/message.html class="notice" content="message_no_validation_requested" %}
